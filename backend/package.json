@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/przemwierzbicki/retrovania/issues"
   },
-  "homepage": "https://github.com/przemwierzbicki/retrovania#readme"
+  "homepage": "https://github.com/przemwierzbicki/retrovania#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
