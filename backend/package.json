@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",
+    "dev": "env-cmd -f ./src/config/dev.env node index.js",
     "lint": "eslint -c .eslintrc .",
     "test": "npm run test:watch",
-    "test:coverage": "jest --coverage --detectOpenHandles --runInBand",
-    "test:watch": "jest --detectOpenHandles --runInBand --watch"
+    "test:coverage": "env-cmd -f ./src/config/test.env jest --coverage --detectOpenHandles --runInBand",
+    "test:watch": "env-cmd -f ./src/config/test.env jest --detectOpenHandles --runInBand --watch"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "eslint-plugin-jest": "^23.0.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.1.1",
+    "env-cmd": "^10.0.1",
     "jest": "^24.9.0",
     "prettier": "^1.18.2"
   }
