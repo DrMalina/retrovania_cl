@@ -1,0 +1,16 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["airbnb-base", "prettier", "plugin:jest/recommended"],
+  "plugins": ["prettier", "jest"],
+  "rules": {
+    "class-methods-use-this": "warn",
+    "func-names": "off",
+    "no-console": "off",
+    "no-unused-vars": "warn",
+    "prettier/prettier": "error"
+  }
+}
