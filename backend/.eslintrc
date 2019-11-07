@@ -8,6 +8,7 @@
   "plugins": ["prettier", "jest"],
   "rules": {
     "class-methods-use-this": "warn",
+    "comma-dangle": "error",
     "func-names": "off",
     "no-console": "off",
     "no-unused-vars": "warn",
