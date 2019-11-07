@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "env-cmd -f ./src/config/dev.env node index.js",
-    "lint": "eslint -c .eslintrc .",
+    "lint": "eslint -c .eslintrc . --fix",
     "test": "npm run test:watch",
     "test:coverage": "env-cmd -f ./src/config/test.env jest --coverage --detectOpenHandles --runInBand",
     "test:watch": "env-cmd -f ./src/config/test.env jest --detectOpenHandles --runInBand --watch"
