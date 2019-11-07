@@ -1,5 +1,7 @@
 const express = require('express');
 
+require('./database/database');
+
 const app = express();
 
 app.get('/example', (req, res) => {
