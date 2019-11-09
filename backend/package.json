@@ -22,7 +22,7 @@
   "homepage": "https://github.com/przemwierzbicki/retrovania#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.7.8"
+    "mongoose": "^5.7.9"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
