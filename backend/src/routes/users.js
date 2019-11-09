@@ -1,7 +1,7 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 
 router.post('/', async (req, res) => {
     try {
@@ -27,6 +27,11 @@ router.post('/', async (req, res) => {
             email: req.body.email,
             password: req.body.password
         });
+
+        // recommended to be used as async functions
+        const salt = await bcrypt.genSalt(10); // In cryptography, a salt is random data that is used as an additional input to a one-way function that "hashes" data, a password or passphrase. Salts are used to safeguard passwords in storage. E.g. Salt value: E1F53135E559C253, 	String to be hashed: password123E1F53135E559C253. Hashed value (salt value + password)
+        user.password = await bcrypt.hash(user.password, salt);
+
         try {
             await user.insertOne(); // mongoDB method - Inserts a document into a collection - same as save() deprecated
         } catch(error) {
