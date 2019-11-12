@@ -20,7 +20,7 @@ const SignIn = () => (
       password: passwordValidation
     })}
   >
-    {props => {
+    {formik => {
       const {
         values,
         touched,
@@ -29,7 +29,7 @@ const SignIn = () => (
         handleChange,
         handleBlur,
         handleSubmit
-      } = props;
+      } = formik;
       return (
         <form onSubmit={handleSubmit}>
           <Input
