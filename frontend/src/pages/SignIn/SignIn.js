@@ -3,12 +3,15 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { emailValidation, passwordValidation } from '../../common/validation';
+import {
+  passwordValidation,
+  userNameValidation
+} from '../../common/validation';
 import { Link } from 'react-router-dom';
 
 const SignIn = () => (
   <Formik
-    initialValues={{ email: '', password: '' }}
+    initialValues={{ username: '', password: '' }}
     onSubmit={(values, { setSubmitting }) => {
       setTimeout(() => {
         console.log('Logging in', values);
@@ -16,7 +19,7 @@ const SignIn = () => (
       }, 500);
     }}
     validationSchema={Yup.object().shape({
-      email: emailValidation,
+      username: userNameValidation,
       password: passwordValidation
     })}
   >
@@ -33,17 +36,17 @@ const SignIn = () => (
       return (
         <form onSubmit={handleSubmit}>
           <Input
-            label='Email'
-            id='email'
-            name='email'
+            label='Username'
+            id='username'
+            name='username'
             type='text'
-            placeholder='Enter your email'
-            value={values.email}
+            placeholder='Enter your email or username'
+            value={values.username}
             onChange={handleChange}
             onBlur={handleBlur}
-            className={errors.email && touched.email && 'error'}
-            error={errors.email}
-            touched={touched.email}
+            className={errors.username && touched.username && 'error'}
+            error={errors.username}
+            touched={touched.username}
           />
 
           <Input
