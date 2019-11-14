@@ -1,23 +1,26 @@
 import React from 'react';
 
-const Input = props => {
+const Input = ({
+  touched,
+  error,
+  label,
+  name,
+  value,
+  onChange,
+  onBlur,
+  ...rest
+}) => {
   return (
     <div>
-      {props.label && <label htmlFor={props.id}>{props.label}</label>}
+      {label && <label htmlFor={name}>{label}</label>}
       <input
-        id={props.id}
-        name={props.name}
-        type={props.type}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChange={props.onChange}
-        onBlur={props.onBlur}
-        className={props.className}
-        required
+        name={name}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        {...rest}
       />
-      {props.error && props.touched && (
-        <div className='input-feedback'>{props.error}</div>
-      )}
+      {error && touched && <div className='input-feedback'>{error}</div>}
     </div>
   );
 };
