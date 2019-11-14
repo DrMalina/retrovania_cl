@@ -13,6 +13,7 @@ const Input = props => {
         onChange={props.onChange}
         onBlur={props.onBlur}
         className={props.className}
+        required
       />
       {props.error && props.touched && (
         <div className='input-feedback'>{props.error}</div>
