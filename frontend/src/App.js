@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Header } from 'components/Header/';
+import { Navigation } from 'components/Navigation';
 
 import { Home } from 'pages/Home';
 import { Games } from 'pages/Games';
@@ -16,7 +16,7 @@ const App = () => {
   return (
     <Router>
       <S.GlobalStyle />
-      <Header />
+      <Navigation />
       <main>
         <Switch>
           <Route exact path='/' component={Home} />
