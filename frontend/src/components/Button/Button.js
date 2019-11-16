@@ -1,10 +1,13 @@
 import React from 'react';
 
+import * as S from './Button.styles';
+
 const Button = ({ type, disabled, children, ...rest }) => {
   return (
-    <button type={type} disabled={disabled} {...rest}>
+    <S.Button type={type} disabled={disabled} {...rest}>
       {children}
-    </button>
+    </S.Button>
   );
 };
+
 export { Button };

@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Navigation } from 'components/Navigation';
+import { Hero } from './components/Hero';
+import { Navigation } from './components/Navigation';
 
 import { Home } from 'pages/Home';
 import { Games } from 'pages/Games';
@@ -17,6 +18,7 @@ const App = () => {
     <Router>
       <S.GlobalStyle />
       <Navigation />
+      <Route exact path='/' component={Hero} />
       <main>
         <Switch>
           <Route exact path='/' component={Home} />

@@ -1,5 +1,8 @@
 import React from 'react';
-import { Game } from 'components/Game/';
+
+import { Game } from 'components/Game';
+import { MainHeading } from 'components/MainHeading';
+import { Section } from 'components/Section';
 
 const exampleDescription =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
@@ -38,7 +41,12 @@ const Games = () => {
       );
     });
   };
-  return <div>{renderGames(exampleData)}</div>;
+  return (
+    <Section>
+      <MainHeading>Games</MainHeading>
+      {renderGames(exampleData)}
+    </Section>
+  );
 };
 
 export { Games };
