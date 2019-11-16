@@ -1,8 +1,8 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
 import {
   passwordValidation,
   userNameValidation
