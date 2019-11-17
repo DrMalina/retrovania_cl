@@ -20,7 +20,7 @@ const SignIn = () => (
       password: fieldValidation('Password is required')
     })}
   >
-    {formik => {
+    {formikProps => {
       const {
         values,
         touched,
@@ -29,7 +29,7 @@ const SignIn = () => (
         handleChange,
         handleBlur,
         handleSubmit
-      } = formik;
+      } = formikProps;
       return (
         <form onSubmit={handleSubmit}>
           <Input
