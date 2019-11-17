@@ -2,12 +2,7 @@ import { Formik, Form, useField } from 'formik';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-
-const capitalizeFirstLetter = string => {
-  return string
-    .replace(/([A-Z])/g, ' $1') // insert a space before all caps
-    .replace(/^./, str => str.toUpperCase()); // capitalize first letter
-};
+import { capitalizeFirstLetter } from '../../common/helpers';
 
 //YUP as validation for Formik
 const validationSchema = Yup.object().shape({
