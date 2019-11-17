@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
-import { passwordValidation, userNameValidation } from 'common/validation';
+import { fieldValidation } from 'common/validation';
 import { Link } from 'react-router-dom';
 
 const SignIn = () => (
@@ -16,8 +16,8 @@ const SignIn = () => (
       }, 500);
     }}
     validationSchema={Yup.object().shape({
-      username: userNameValidation,
-      password: passwordValidation
+      username: fieldValidation('Username is required'),
+      password: fieldValidation('Password is required')
     })}
   >
     {formik => {

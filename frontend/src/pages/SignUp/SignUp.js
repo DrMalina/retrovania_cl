@@ -3,22 +3,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { capitalizeFirstLetter } from '../../common/helpers';
+import {
+  fieldValidation,
+  emailValidation,
+  passwordValidation,
+  confirmPasswordValidation
+} from '../../common/validation';
 
-//YUP as validation for Formik
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required('Username is required'),
-  email: Yup.string()
-    .email('E-mail is not valid')
-    .required('E-mail is required'),
-  password: Yup.string()
-    .min(6, 'Password must be longer than 6 characters')
-    .max(16, 'Password is too long')
-    .required('Password is required'),
-  confirmPassword: Yup.string()
-    .required('Password confirmation is required!')
-    .test('passwords-match', 'Passwords do not match', function(value) {
-      return this.parent.password === value;
-    })
+  username: fieldValidation('Username is required'),
+  email: emailValidation,
+  password: passwordValidation,
+  confirmPassword: confirmPasswordValidation
 });
 
 const submitUserData = ({ username, email, password }) => {
