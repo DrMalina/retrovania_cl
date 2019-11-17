@@ -1,12 +1,9 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Input } from '../../components/Input';
-import { Button } from '../../components/Button';
-import {
-  passwordValidation,
-  userNameValidation
-} from '../../common/validation';
+import { Input } from 'components/Input';
+import { Button } from 'components/Button';
+import { passwordValidation, userNameValidation } from 'common/validation';
 import { Link } from 'react-router-dom';
 
 const SignIn = () => (
