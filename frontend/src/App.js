@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { Hero } from './components/Hero';
-import { Navigation } from './components/Navigation';
+import { Footer } from 'components/Footer';
+import { Hero } from 'components/Hero';
+import { Navigation } from 'components/Navigation';
 
 import { Home } from 'pages/Home';
 import { Games } from 'pages/Games';
@@ -27,6 +28,7 @@ const App = () => {
           <Route path='/signup' component={SignUp} />
         </Switch>
       </main>
+      <Footer />
     </Router>
   );
 };
