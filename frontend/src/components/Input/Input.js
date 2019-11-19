@@ -1,26 +1,14 @@
 import React from 'react';
+import { useField } from 'formik';
 
-const Input = ({
-  touched,
-  error,
-  label,
-  name,
-  value,
-  onChange,
-  onBlur,
-  ...rest
-}) => {
+const Input = props => {
+  const [field, meta] = useField(props); //Formik Hook
+  const { label, name, type, ...rest } = props;
   return (
     <div>
       {label && <label htmlFor={name}>{label}</label>}
-      <input
-        name={name}
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        {...rest}
-      />
-      {error && touched && <div className='input-feedback'>{error}</div>}
+      <input name={name} type={type} {...field} {...rest} />
+      {meta.touched && meta.error ? <div>{meta.error}</div> : null}
     </div>
   );
 };

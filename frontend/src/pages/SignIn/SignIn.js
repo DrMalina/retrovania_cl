@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Input } from 'components/Input';
+
+import { renderFormFields } from 'common/helpers';
+import { fieldValidation } from 'common/validation';
+
 import { Button } from 'components/Button';
-import { passwordValidation, userNameValidation } from 'common/validation';
-import { Link } from 'react-router-dom';
 
 const SignIn = () => (
   <Formik
@@ -16,49 +18,15 @@ const SignIn = () => (
       }, 500);
     }}
     validationSchema={Yup.object().shape({
-      username: userNameValidation,
-      password: passwordValidation
+      username: fieldValidation('Username is required'),
+      password: fieldValidation('Password is required')
     })}
   >
-    {props => {
-      const {
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      } = props;
+    {formikProps => {
+      const { handleSubmit, initialValues, isSubmitting } = formikProps;
       return (
         <form onSubmit={handleSubmit}>
-          <Input
-            label='Username'
-            id='username'
-            name='username'
-            type='text'
-            placeholder='Enter your email or username'
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.username && touched.username && 'error'}
-            error={errors.username}
-            touched={touched.username}
-          />
-
-          <Input
-            label='Password'
-            id='password'
-            name='password'
-            type='password'
-            placeholder='Enter your password'
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.password && touched.password && 'error'}
-            error={errors.password}
-            touched={touched.password}
-          />
+          {renderFormFields(Object.keys(initialValues))}
           <Button type='submit' disabled={isSubmitting}>
             Login
           </Button>
