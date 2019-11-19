@@ -1,4 +1,3 @@
-// utilities:
 import * as messages from 'redux/placeholder/placeholderMessages';
 
 export const placeholderCleanup = () => ({
