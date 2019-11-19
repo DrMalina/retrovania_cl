@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Input } from 'components/Input';
-import { Button } from 'components/Button';
+
+import { renderFormFields } from 'common/helpers';
 import { fieldValidation } from 'common/validation';
-import { Link } from 'react-router-dom';
+
+import { Button } from 'components/Button';
 
 const SignIn = () => (
   <Formik
@@ -21,44 +23,10 @@ const SignIn = () => (
     })}
   >
     {formikProps => {
-      const {
-        values,
-        touched,
-        errors,
-        isSubmitting,
-        handleChange,
-        handleBlur,
-        handleSubmit
-      } = formikProps;
+      const { handleSubmit, initialValues, isSubmitting } = formikProps;
       return (
         <form onSubmit={handleSubmit}>
-          <Input
-            label='Username'
-            id='username'
-            name='username'
-            type='text'
-            placeholder='Enter your email or username'
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.username && touched.username && 'error'}
-            error={errors.username}
-            touched={touched.username}
-          />
-
-          <Input
-            label='Password'
-            id='password'
-            name='password'
-            type='password'
-            placeholder='Enter your password'
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.password && touched.password && 'error'}
-            error={errors.password}
-            touched={touched.password}
-          />
+          {renderFormFields(Object.keys(initialValues))}
           <Button type='submit' disabled={isSubmitting}>
             Login
           </Button>
