@@ -1,11 +1,9 @@
 const express = require('express');
-
-require('./database/database');
+const routes = require('./routes/rootRoute');
 
 const app = express();
 
-app.get('/example', (req, res) => {
-  res.status(200).send({ example: 'example' });
-});
+app.use(express.json());
+app.use('/api', routes);
 
 module.exports = app;

@@ -1,7 +1,6 @@
 const app = require('./src/app');
-const config = require('./src/config/config');
+require('./src/database/database');
 
-const { PORT } = config;
-app.listen(PORT, () => {
-  console.log(`up&running on ${PORT}.`);
+app.listen(process.env.PORT, () => {
+  console.log(`up&running on ${process.env.PORT}.`);
 });
