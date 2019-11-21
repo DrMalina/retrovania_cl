@@ -2,12 +2,13 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
+import usersAPI from 'services/Users';
 import { renderFormFields } from 'common/helpers';
 import {
   confirmPasswordValidation,
   emailValidation,
-  fieldValidation,
-  passwordValidation
+  passwordValidation,
+  usernameValidation
 } from 'common/validation';
 
 import { Button } from 'components/Button';
@@ -16,16 +17,19 @@ import { MainHeading } from 'components/MainHeading';
 import { Section } from 'components/Section';
 
 const validationSchema = Yup.object().shape({
-  username: fieldValidation('Username is required'),
+  username: usernameValidation,
   email: emailValidation,
   password: passwordValidation,
   confirmPassword: confirmPasswordValidation
 });
 
-const submitUserData = data => {
-  //TODO: Send data to the server
-  //Temporary: Alert the results
-  alert(`Success!\n User: ${JSON.stringify(data, null, 2)}`);
+const submitUserData = async user => {
+  try {
+    const res = await usersAPI.post('/signup', user);
+    console.log(res.data);
+  } catch (err) {
+    console.error(err.response.data);
+  }
 };
 
 const SignUp = () => (
@@ -37,9 +41,9 @@ const SignUp = () => (
       confirmPassword: ''
     }}
     validationSchema={validationSchema}
-    onSubmit={({ username, email, password }) =>
-      submitUserData({ username, email, password })
-    }
+    onSubmit={({ username, email, password }) => {
+      submitUserData({ name: username, email, password });
+    }}
   >
     {formikProps => {
       const { handleSubmit, initialValues } = formikProps;
