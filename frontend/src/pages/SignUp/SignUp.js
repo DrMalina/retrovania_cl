@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
@@ -12,6 +11,9 @@ import {
 } from 'common/validation';
 
 import { Button } from 'components/Button';
+import { Link } from 'components/Link';
+import { MainHeading } from 'components/MainHeading';
+import { Section } from 'components/Section';
 
 const validationSchema = Yup.object().shape({
   username: fieldValidation('Username is required'),
@@ -42,14 +44,16 @@ const SignUp = () => (
     {formikProps => {
       const { handleSubmit, initialValues } = formikProps;
       return (
-        <Form onSubmit={handleSubmit}>
-          <h2>Create An Account</h2>
-          {renderFormFields(Object.keys(initialValues))}
-          <Button type='submit'>Sign Up</Button>
-          <p>
-            Already a member? <Link to='/signin'>Sign In</Link>
-          </p>
-        </Form>
+        <Section>
+          <MainHeading>Sign Up</MainHeading>
+          <Form onSubmit={handleSubmit}>
+            {renderFormFields(Object.keys(initialValues))}
+            <Button type='submit'>Sign Up</Button>
+            <p>
+              Already a member? <Link to='/signin'>Sign In</Link>
+            </p>
+          </Form>
+        </Section>
       );
     }}
   </Formik>
