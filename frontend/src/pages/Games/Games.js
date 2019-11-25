@@ -1,52 +1,14 @@
 import React from 'react';
 
-import { Game } from 'components/Game';
+import { GamesList } from 'components/GamesList';
 import { MainHeading } from 'components/MainHeading';
 import { Section } from 'components/Section';
 
-const exampleDescription =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-const exampleData = [
-  {
-    title: 'Super Mario Bros',
-    year: 1985,
-    company: 'Nintendo',
-    description: exampleDescription
-  },
-  {
-    title: 'Contra',
-    year: 1988,
-    company: 'Konami',
-    description: exampleDescription
-  },
-  {
-    title: 'Battle City',
-    year: 1985,
-    company: 'Namco',
-    description: exampleDescription
-  }
-];
-
-const Games = () => {
-  const renderGames = data => {
-    return data.map(({ company, description, title, year }) => {
-      return (
-        <Game
-          company={company}
-          description={description}
-          key={title + company}
-          title={title}
-          year={year}
-        />
-      );
-    });
-  };
-  return (
-    <Section>
-      <MainHeading>Games</MainHeading>
-      {renderGames(exampleData)}
-    </Section>
-  );
-};
+const Games = () => (
+  <Section>
+    <MainHeading>Games</MainHeading>
+    <GamesList />
+  </Section>
+);
 
 export { Games };

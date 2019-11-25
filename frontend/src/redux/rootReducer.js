@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import placeholderReducer from 'redux/placeholder/placeholderReducer';
+import gamesReducer from 'redux/games/reducer';
 
 const rootReducer = combineReducers({
-  placeholder: placeholderReducer,
+  games: gamesReducer,
 });
 
 export default rootReducer;
