@@ -1,5 +1,4 @@
-// utilities:
-import * as messages from 'redux/messages';
+import * as messages from 'redux/placeholder/placeholderMessages';
 
 const INITIAL_STATE = {
   example: 'example',

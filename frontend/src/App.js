@@ -1,5 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
+import { store } from 'redux/store';
 
 import { Footer } from 'components/Footer';
 import { Hero } from 'components/Hero';
@@ -16,20 +19,22 @@ import 'normalize.css';
 
 const App = () => {
   return (
-    <Router>
-      <S.GlobalStyle />
-      <Navigation />
-      <Route exact path='/' component={Hero} />
-      <main>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/games' component={Games} />
-          <Route path='/signin' component={SignIn} />
-          <Route path='/signup' component={SignUp} />
-        </Switch>
-      </main>
-      <Footer />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <S.GlobalStyle />
+        <Navigation />
+        <Route exact path='/' component={Hero} />
+        <main>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/games' component={Games} />
+            <Route path='/signin' component={SignIn} />
+            <Route path='/signup' component={SignUp} />
+          </Switch>
+        </main>
+        <Footer />
+      </Router>
+    </Provider>
   );
 };
 

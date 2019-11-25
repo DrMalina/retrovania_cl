@@ -1,6 +1,4 @@
-// dependencies:
 import { applyMiddleware, compose, createStore } from 'redux';
-// utilities/reducers:
 import rootReducer from 'redux/rootReducer';
 
 const INITIAL_STATE = { };
