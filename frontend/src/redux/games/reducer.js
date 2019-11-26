@@ -16,7 +16,8 @@ export default function gamesReducer(state = INITIAL_STATE, action) {
     case types.GAMES_FETCH_SUCCESS:
       return {
         ...state,
-        error: null,
+        // error: null,
+        error: 'error',
         gamesInStore: action.payload.games,
         loading: false,
       };
