@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { GamesList } from './GamesList';
+import { withSpinnerLocal } from 'components/withSpinnerLocal';
 import { gamesFetch } from 'redux/games/utils';
 
 const GamesListContainer = ({ games, gamesFetch }) => {
@@ -24,7 +25,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const EnhancedGamesListContainer = compose(
   connect(mapStateToProps, mapDispatchToProps),
-  // spinner,
+  withSpinnerLocal,
   // errorHandler,
 )(GamesListContainer);
 

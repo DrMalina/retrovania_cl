@@ -1,0 +1,1 @@
+export { withSpinnerLocal } from './withSpinnerLocal';
