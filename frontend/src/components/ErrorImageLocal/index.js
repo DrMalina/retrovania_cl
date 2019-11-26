@@ -1,0 +1,1 @@
+export { ErrorImageLocal } from './ErrorImageLocal';
