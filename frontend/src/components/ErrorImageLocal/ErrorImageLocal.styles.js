@@ -1,4 +1,6 @@
-.error-image-local__container {
+import styled from 'styled-components';
+
+const ErrorImageLocalContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -6,9 +8,9 @@
   justify-content: center;
   position: relative;
   width: 100%;
-}
+`;
 
-.error-image-local__error-message {
+const ErrorImageLocalMessage = styled.span`
   align-items: center;
   background-color: #000;
   color: #fff;
@@ -24,4 +26,6 @@
   text-transform: uppercase;
   top: 50%;
   transform: translateX(-50%) translateY(-75%);
-}
+`;
+
+export { ErrorImageLocalContainer, ErrorImageLocalMessage };

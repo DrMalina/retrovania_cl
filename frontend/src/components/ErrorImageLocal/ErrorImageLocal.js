@@ -1,11 +1,11 @@
 import React from 'react';
-import './errorImageLocal.css';
+import * as S from './ErrorImageLocal.styles';
 
 const ErrorImageLocal = () => (
-  <div className="error-image-local__container">
-    <img src="/images/no-signal-image.png" />
-    <span className="error-image-local__error-message">error</span>
-  </div>
+  <S.ErrorImageLocalContainer>
+    <img src='/images/no-signal-image.png' />
+    <S.ErrorImageLocalMessage>error</S.ErrorImageLocalMessage>
+  </S.ErrorImageLocalContainer>
 );
 
 export { ErrorImageLocal };

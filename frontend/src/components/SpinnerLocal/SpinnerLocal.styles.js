@@ -1,4 +1,6 @@
-.spinner-local__container {
+import styled from 'styled-components';
+
+const SpinnerLocalContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -9,4 +11,6 @@
   position: relative;
   width: 100%;
   min-width: 200px;
-}
+`;
+
+export { SpinnerLocalContainer };

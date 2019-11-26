@@ -1,15 +1,12 @@
 import React from 'react';
+import * as S from './SpinnerLocal.styles';
 import { PacmanLoader } from 'react-spinners';
-import './spinnerLocal.css';
+import { colors } from 'utils/colors';
 
 const SpinnerLocal = () => (
-  <div className="spinner-local__container">
-    <PacmanLoader
-      color={'#df28fe'}
-      size={50}
-      sizeUnit={'px'}
-    />
-  </div>
+  <S.SpinnerLocalContainer>
+    <PacmanLoader color={colors.text.secondary.hex} size={50} sizeUnit='50' />
+  </S.SpinnerLocalContainer>
 );
 
 export { SpinnerLocal };

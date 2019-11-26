@@ -9,25 +9,28 @@ import { gamesFetch } from 'redux/games/utils';
 const GamesListContainer = ({ games, gamesFetch }) => {
   useEffect(() => {
     gamesFetch();
-  }, [ ]);
+  }, []);
 
-  return <GamesList games={games} />
+  return <GamesList games={games} />;
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   error: state.games.error,
   games: state.games.gamesInStore,
-  isLoading: state.games.loading,
+  isLoading: state.games.loading
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  gamesFetch: (limit) => dispatch(gamesFetch(limit)),
+const mapDispatchToProps = dispatch => ({
+  gamesFetch: limit => dispatch(gamesFetch(limit))
 });
 
 const EnhancedGamesListContainer = compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withSpinnerLocal,
-  errorHandlerLocal,
+  errorHandlerLocal
 )(GamesListContainer);
 
 export { EnhancedGamesListContainer as GamesListContainer };
