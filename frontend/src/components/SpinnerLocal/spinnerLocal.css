@@ -1,0 +1,12 @@
+.spinner-local__container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 200px;
+  justify-content: center;
+  margin-bottom: 100px;
+  position: relative;
+  width: 100%;
+  min-width: 200px;
+}
