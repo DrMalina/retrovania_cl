@@ -28,3 +28,5 @@ mongoose.connection
   .on('reconnected', () => {
     console.log('database: reconnected');
   });
+
+module.exports = mongoose;
