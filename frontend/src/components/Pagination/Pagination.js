@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import * as S from './Pagination.styles';
+
 export const Pagination = props => {
   const [activePage, setActivePage] = useState(1);
 
@@ -22,17 +24,17 @@ export const Pagination = props => {
 
   const createPages = () => {
     return Array.from(Array(props.pageCount).keys()).map((el, index) => (
-      <li onClick={() => onClick(index + 1)} key={index}>
+      <S.Li onClick={() => onClick(index + 1)} key={index}>
         {index + 1}
-      </li>
+      </S.Li>
     ));
   };
 
   return (
-    <ul>
-      <li onClick={onClickPrevious}>Previous</li>
+    <S.Ul>
+      <S.Li onClick={onClickPrevious}>Previous</S.Li>
       {createPages()}
-      <li onClick={onClickNext}>Next</li>
-    </ul>
+      <S.Li onClick={onClickNext}>Next</S.Li>
+    </S.Ul>
   );
 };
