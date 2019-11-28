@@ -5,7 +5,12 @@ import { colors } from 'utils/colors';
 
 const SpinnerLocal = () => (
   <S.SpinnerLocalContainer>
-    <PacmanLoader color={colors.text.secondary.hex} size={50} sizeUnit='50' />
+    <PacmanLoader
+      color={colors.text.secondary.hex}
+      css={S.spinnerLocalCss}
+      size={50}
+      sizeUnit='px'
+    />
   </S.SpinnerLocalContainer>
 );
 
