@@ -1,18 +1,20 @@
+const { isInt } = require('validator');
+
 const Game = require('../../models/Game');
 
-const getGames = async (req, res) => {
+async function getGames(req, res, next) {
   try {
-    const totalCount = await Game.countDocuments();
-    const limit = Number(req.query.limit) || totalCount;
-    const games = await Game.find({}).limit(limit);
+    const { limit = '15', page = '1' } = req.query;
 
-    res.status(200).json({
-      totalCount,
-      games,
-    });
-  } catch (error) {
-    res.status(500).send('Internal server error');
+    if (isInt(limit, { min: 1 }) && isInt(page, { min: 1 })) {
+      const games = await Game.paginate({}, { limit: +limit, page: +page });
+      return res.status(200).json(games);
+    }
+
+    return res.status(400).send('Invalid query parameters.');
+  } catch (err) {
+    next(err);
   }
-};
+}
 
 module.exports = getGames;
