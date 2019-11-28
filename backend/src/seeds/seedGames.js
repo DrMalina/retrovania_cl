@@ -7,7 +7,7 @@ const Genre = require('../models/Genre');
 const seedGames = () => {
   apiClient(
     'games',
-    'fields cover,first_release_date,genres,name,rating,storyline,summary; where release_dates.date < 631152000 & cover != null; limit 10;',
+    'fields cover,first_release_date,genres,name,rating,storyline,summary; where release_dates.date < 631152000 & cover != null; limit 150;',
   )
     .then(async response => {
       const gameIds = response.data.map(game => `${game.id}`);
@@ -21,7 +21,6 @@ const seedGames = () => {
         const gameCovers = await getCovers(gameIds);
 
         const gameCover = gameCovers.find(cover => cover.id === game.id);
-        console.log(gameCover);
         await Game.create({
           name: game.name,
           cover: gameCover ? gameCover.url : null,
