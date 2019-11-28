@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "env-cmd -f ./src/config/dev.env node index.js",
+    "dev": "env-cmd -f ./src/config/dev.env nodemon index.js",
     "lint": "eslint -c .eslintrc . --fix",
     "test": "npm run test:watch",
     "test:coverage": "env-cmd -f ./src/config/test.env jest --coverage --detectOpenHandles --runInBand",
@@ -24,12 +24,19 @@
     "@hapi/joi": "^16.1.7",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.7.9"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.9",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "validator": "^12.1.0"
   },
   "devDependencies": {
+    "env-cmd": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^6.3.0",
@@ -37,8 +44,8 @@
     "eslint-plugin-jest": "^23.0.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "env-cmd": "^10.0.1",
     "jest": "^24.9.0",
+    "nodemon": "^2.0.1",
     "prettier": "^1.18.2"
   }
 }
