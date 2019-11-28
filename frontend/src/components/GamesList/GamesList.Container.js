@@ -13,7 +13,7 @@ const GamesListContainer = ({ games, gamesFetch }) => {
     }
   }, []);
 
-  return <GamesList games={games} />;
+  return <GamesList games={games} gamesFetch={gamesFetch} />;
 };
 
 const mapStateToProps = state => ({
