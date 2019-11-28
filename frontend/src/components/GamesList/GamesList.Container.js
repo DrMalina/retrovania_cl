@@ -8,8 +8,10 @@ import { gamesFetch } from 'redux/games/utils';
 
 const GamesListContainer = ({ games, gamesFetch }) => {
   useEffect(() => {
-    gamesFetch();
-  }, []);
+    if (!games.length) {
+      gamesFetch();
+    }
+  }, [games, gamesFetch]);
 
   return <GamesList games={games} />;
 };
