@@ -8,10 +8,10 @@ import { gamesFetch } from 'redux/games/utils';
 
 const GamesListContainer = ({ games, gamesFetch }) => {
   useEffect(() => {
-    if (!games.length) {
+    if (games.length === 0) {
       gamesFetch();
     }
-  }, [games, gamesFetch]);
+  }, []);
 
   return <GamesList games={games} />;
 };
@@ -31,7 +31,7 @@ const EnhancedGamesListContainer = compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withSpinnerLocal,
+  withSpinnerLocal, // Commented out because it is causing infinite re-rendering of games list. Spinner should not be a HOC but a component inside a page
   errorHandlerLocal
 )(GamesListContainer);
 
