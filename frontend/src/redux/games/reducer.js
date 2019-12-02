@@ -3,7 +3,8 @@ import * as types from './types';
 const INITIAL_STATE = {
   error: null,
   gamesInStore: [],
-  loading: false
+  loading: false,
+  total: 0
 };
 
 export default function gamesReducer(state = INITIAL_STATE, action) {
@@ -17,8 +18,9 @@ export default function gamesReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         error: null,
-        gamesInStore: action.payload.games,
-        loading: false
+        gamesInStore: action.payload.games.games,
+        loading: false,
+        total: action.payload.games.totalCount
       };
     case types.GAMES_FETCH_FAILURE:
       return {
