@@ -1,12 +1,12 @@
 import React from 'react';
-import './Game.css';
+import './GamesListItem.css';
 
 import { Button } from 'components/Button';
 import { Link } from 'components/Link';
 
-const Game = ({ id, name, summary, genres, firstReleaseDate, cover }) => {
+const GamesListItem = ({ id, name, summary, genres, firstReleaseDate, cover }) => {
   return (
-    <div className='Game'>
+    <div className='GamesListItem'>
       <h2>{name}</h2>
       <img src={cover} />
       <p>{new Date(firstReleaseDate * 1000).toDateString()}</p>
@@ -19,4 +19,4 @@ const Game = ({ id, name, summary, genres, firstReleaseDate, cover }) => {
   );
 };
 
-export { Game };
+export { GamesListItem };
