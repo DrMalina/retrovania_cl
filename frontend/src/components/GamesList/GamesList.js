@@ -5,11 +5,12 @@ import * as S from './GamesLists.styles';
 
 const GamesList = ({ games }) => (
   <S.GamesListWrapper>
-    {games.map(({ name, summary, genres, firstReleaseDate, cover }) => (
+    {games.map(({ _id, name, summary, genres, firstReleaseDate, cover }) => (
       <Game
+        id={_id}
         name={name}
         summary={summary}
-        key={name}
+        key={_id}
         genres={genres}
         firstReleaseDate={firstReleaseDate}
         cover={cover}
