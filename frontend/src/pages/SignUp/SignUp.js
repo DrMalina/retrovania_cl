@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
@@ -6,8 +7,8 @@ import { renderFormFields } from 'common/helpers';
 import {
   confirmPasswordValidation,
   emailValidation,
-  fieldValidation,
-  passwordValidation
+  passwordValidation,
+  usernameValidation
 } from 'common/validation';
 
 import { Button } from 'components/Button';
@@ -15,48 +16,47 @@ import { Link } from 'components/Link';
 import { MainHeading } from 'components/MainHeading';
 import { Section } from 'components/Section';
 
+import { signInReq } from 'redux/users/utils';
+
 const validationSchema = Yup.object().shape({
-  username: fieldValidation('Username is required'),
+  username: usernameValidation,
   email: emailValidation,
   password: passwordValidation,
   confirmPassword: confirmPasswordValidation
 });
 
-const submitUserData = data => {
-  //TODO: Send data to the server
-  //Temporary: Alert the results
-  alert(`Success!\n User: ${JSON.stringify(data, null, 2)}`);
+const SignUp = () => {
+  const dispatch = useDispatch();
+  return (
+    <Formik
+      initialValues={{
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      }}
+      validationSchema={validationSchema}
+      onSubmit={({ username, email, password }) => {
+        dispatch(signInReq({ name: username, email, password }, '/signup'));
+      }}
+    >
+      {formikProps => {
+        const { initialValues } = formikProps;
+        return (
+          <Section>
+            <MainHeading>Sign Up</MainHeading>
+            <Form>
+              {renderFormFields(Object.keys(initialValues))}
+              <Button type='submit'>Sign Up</Button>
+              <p>
+                Already a member? <Link to='/signin'>Sign In</Link>
+              </p>
+            </Form>
+          </Section>
+        );
+      }}
+    </Formik>
+  );
 };
-
-const SignUp = () => (
-  <Formik
-    initialValues={{
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    }}
-    validationSchema={validationSchema}
-    onSubmit={({ username, email, password }) =>
-      submitUserData({ username, email, password })
-    }
-  >
-    {formikProps => {
-      const { handleSubmit, initialValues } = formikProps;
-      return (
-        <Section>
-          <MainHeading>Sign Up</MainHeading>
-          <Form onSubmit={handleSubmit}>
-            {renderFormFields(Object.keys(initialValues))}
-            <Button type='submit'>Sign Up</Button>
-            <p>
-              Already a member? <Link to='/signin'>Sign In</Link>
-            </p>
-          </Form>
-        </Section>
-      );
-    }}
-  </Formik>
-);
 
 export { SignUp };
