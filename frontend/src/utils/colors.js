@@ -25,6 +25,24 @@ const colors = {
       }
     }
   },
+  input: {
+    border: {
+      hex: '#803cb4',
+      rgb: '128, 60, 180'
+    },
+    error: {
+      hex: '#be292e',
+      rgb: '190, 41, 46'
+    },
+    focus: {
+      hex: '#078bd9',
+      rgb: '7, 139, 217'
+    },
+    valid: {
+      hex: '#23be9e',
+      rgb: '35, 190, 158'
+    }
+  },
   mainBackground: {
     dark: {
       hex: '#1d022b',

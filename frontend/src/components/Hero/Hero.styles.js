@@ -32,7 +32,7 @@ const HeroHeading = styled(MainHeading)`
 `;
 
 const HeroSlogan = styled.p`
-  font-size: ${sizes.big};
+  font-size: ${sizes.xLarge};
   line-height: 1.35;
   margin: 0 160px 70px;
   text-shadow: 1px 1px 10px rgba(${border.light.rgb}, 0.6);

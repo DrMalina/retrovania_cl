@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { renderFormFields } from 'common/helpers';
@@ -12,6 +12,7 @@ import {
 } from 'common/validation';
 
 import { Button } from 'components/Button';
+import { Form } from 'components/Form';
 import { Link } from 'components/Link';
 import { MainHeading } from 'components/MainHeading';
 import { Section } from 'components/Section';
@@ -48,10 +49,10 @@ const SignUp = () => {
             <Form>
               {renderFormFields(Object.keys(initialValues))}
               <Button type='submit'>Sign Up</Button>
-              <p>
-                Already a member? <Link to='/signin'>Sign In</Link>
-              </p>
             </Form>
+            <p>
+              Already a member? <Link to='/signin'>Sign In</Link>
+            </p>
           </Section>
         );
       }}
