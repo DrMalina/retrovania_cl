@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const paginate = require('mongoose-paginate');
 
 const schema = new mongoose.Schema({
   cover: String,
@@ -8,5 +9,9 @@ const schema = new mongoose.Schema({
   rate: Number,
   summary: String,
 });
+
+schema.plugin(paginate);
+
 const Game = mongoose.model('game', schema);
+
 module.exports = Game;

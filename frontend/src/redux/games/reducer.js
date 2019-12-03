@@ -18,9 +18,9 @@ export default function gamesReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         error: null,
-        gamesInStore: action.payload.games.games,
+        gamesInStore: action.payload.games.docs,
         loading: false,
-        total: action.payload.games.totalCount
+        total: action.payload.games.total
       };
     case types.GAMES_FETCH_FAILURE:
       return {
