@@ -8,20 +8,21 @@ import { Game } from './Game';
 
 import { gameFetch } from 'redux/game/utils';
 
-const GameContainer = ({ id, game, gameFetch }) => {
+const GameContainer = ({ id, isUserLoggedIn, game, gameFetch }) => {
   useEffect(() => {
     if (!game || game._id !== id) {
       gameFetch(id);
     }
   }, []);
 
-  return <Game game={game} />;
+  return <Game game={game} isUserLoggedIn={isUserLoggedIn} />;
 };
 
 const mapStateToProps = state => ({
   error: state.game.error,
   game: state.game.current,
-  isLoading: state.game.loading
+  isLoading: state.game.loading,
+  isUserLoggedIn: !!state.user.current
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -6,8 +6,7 @@ import { Section } from 'components/Section';
 
 const Game = ({ match }) => (
   <Section>
-    <MainHeading>Game</MainHeading>
-    <p>{match.params.id}</p>
+    <MainHeading>Game Details</MainHeading>
     <GameComponent id={match.params.id} />
   </Section>
 );

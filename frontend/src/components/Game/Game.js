@@ -1,11 +1,40 @@
 import React from 'react';
 
-const Game = ({ game }) =>
-  game && (
-    <div>
-      <h2>{game.name}</h2>
-      <p>{game.summary}</p>
-    </div>
+import { Button } from 'components/Button';
+import { Link } from 'components/Link';
+
+import * as S from './Game.styles';
+
+const Game = ({ game, isUserLoggedIn }) => {
+  const renderActions = () =>
+    isUserLoggedIn ? (
+      <Button>Rent it</Button>
+    ) : (
+      <p>
+        <Link to='/signin'>Sign in</Link> or <Link to='/signup'>Sign up</Link>{' '}
+        to rent this game.
+      </p>
+    );
+
+  return (
+    game && (
+      <S.GameWrapper>
+        <S.GameTitle>{game.name}</S.GameTitle>
+        <S.GameSummary>{game.summary}</S.GameSummary>
+        <S.GameReleaseDate>
+          {'Release date: '}
+          <S.GameHighlight>
+            {new Date(game.firstReleaseDate * 1000).toLocaleDateString()}
+          </S.GameHighlight>
+        </S.GameReleaseDate>
+        <S.GameGenres>
+          {'Genres: '}
+          <S.GameHighlight>{game.genres.join(', ')}</S.GameHighlight>
+        </S.GameGenres>
+        <S.GameActions>{renderActions()}</S.GameActions>
+      </S.GameWrapper>
+    )
   );
+};
 
 export { Game };
