@@ -37,7 +37,7 @@ const SignUp = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={({ username, email, password }) => {
-        dispatch(signInReq({ name: username, email, password }, '/signup'));
+        dispatch(signInReq('signup', { name: username, email, password }));
       }}
     >
       {formikProps => {
