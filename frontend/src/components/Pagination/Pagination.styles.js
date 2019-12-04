@@ -10,5 +10,10 @@ const Li = styled.li`
   padding: 8px 10px;
   text-decoration: none;
   list-style-type: none;
+
+  ${props =>
+    props.disabled &&
+    `pointer-events:none; 
+      color: #ddd;`}
 `;
 export { Ul, Li };
