@@ -6,19 +6,20 @@ import { GamesList } from './GamesList';
 import { withSpinnerLocal } from 'components/withSpinnerLocal';
 import { gamesFetch } from 'redux/games/utils';
 
-const GamesListContainer = ({ games, gamesFetch }) => {
+const GamesListContainer = ({ games, gamesFetch, total }) => {
   useEffect(() => {
     if (games.length === 0) {
       gamesFetch();
     }
   }, []);
 
-  return <GamesList games={games} gamesFetch={gamesFetch} />;
+  return <GamesList games={games} gamesFetch={gamesFetch} total={total} />;
 };
 
 const mapStateToProps = state => ({
   error: state.games.error,
   games: state.games.gamesInStore,
+  total: state.games.total,
   isLoading: state.games.loading
 });
 
