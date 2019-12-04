@@ -4,7 +4,7 @@ import { Pagination } from '../Pagination/Pagination';
 
 import * as S from './GamesList.styles';
 
-const GamesList = ({ games, gamesFetch }) => (
+const GamesList = ({ games, gamesFetch, total }) => (
   <S.GamesListWrapper>
     {games.map(({ _id, genres, name, summary }) => (
       <GamesListItem
@@ -16,7 +16,7 @@ const GamesList = ({ games, gamesFetch }) => (
       />
     ))}
 
-    <Pagination pageCount={3} onClick={gamesFetch} />
+    <Pagination pageCount={Math.ceil(total / 10)} onClick={gamesFetch} />
   </S.GamesListWrapper>
 );
 
