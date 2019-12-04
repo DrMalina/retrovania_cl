@@ -16,7 +16,7 @@ export default function gameReducer(state = INITIAL_STATE, action) {
     case types.GAME_FETCH_SUCCESS:
       return {
         ...state,
-        current: action.payload.game,
+        current: action.payload.game.gameData,
         error: null,
         loading: false
       };
