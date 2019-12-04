@@ -1,21 +1,25 @@
 import React from 'react';
-import './GamesListItem.css';
 
-import { Button } from 'components/Button';
 import { Link } from 'components/Link';
+import { truncateString } from 'common/helpers';
 
-const GamesListItem = ({ id, name, summary, genres, firstReleaseDate, cover }) => {
+import * as S from './GamesListItem.styles';
+
+const GamesListItem = ({ id, genres, name, summary }) => {
   return (
-    <div className='GamesListItem'>
-      <h2>{name}</h2>
-      <img src={cover} />
-      <p>{new Date(firstReleaseDate * 1000).toDateString()}</p>
-      <p>{genres.join(' ')}</p>
-      <p>{summary}</p>
-      <Button as={Link} to={`/games/${id}`}>
+    <S.GamesListItemWrapper>
+      <S.GameDetails>
+        <S.GameTitle>{name}</S.GameTitle>
+        <S.GameGenres>
+          {'Genres: '}
+          <S.GameHighlight>{genres.join(', ')}</S.GameHighlight>
+        </S.GameGenres>
+        <S.GameSummary>{summary && truncateString(summary, 150)}</S.GameSummary>
+      </S.GameDetails>
+      <S.GameLink as={Link} to={`/games/${id}`}>
         See more
-      </Button>
-    </div>
+      </S.GameLink>
+    </S.GamesListItemWrapper>
   );
 };
 

@@ -18,3 +18,13 @@ export const renderFormFields = values => {
     />
   ));
 };
+
+export const truncateString = (
+  string,
+  maxLength,
+  endWith = '...',
+  separator = ' '
+) => {
+  if (string.length <= maxLength) return string;
+  return string.slice(0, string.lastIndexOf(separator, maxLength)) + endWith;
+};

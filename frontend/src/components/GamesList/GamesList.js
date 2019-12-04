@@ -1,19 +1,17 @@
 import React from 'react';
 import { GamesListItem } from 'components/GamesListItem';
 
-import * as S from './GamesLists.styles';
+import * as S from './GamesList.styles';
 
 const GamesList = ({ games }) => (
   <S.GamesListWrapper>
-    {games.map(({ _id, name, summary, genres, firstReleaseDate, cover }) => (
+    {games.map(({ _id, genres, name, summary }) => (
       <GamesListItem
+        genres={genres}
         id={_id}
+        key={_id}
         name={name}
         summary={summary}
-        key={_id}
-        genres={genres}
-        firstReleaseDate={firstReleaseDate}
-        cover={cover}
       />
     ))}
   </S.GamesListWrapper>
