@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import { renderFormFields } from 'common/helpers';
 import { fieldValidation } from 'common/validation';
 
 import { Button } from 'components/Button';
+import { Form } from 'components/Form';
 import { Link } from 'components/Link';
 import { MainHeading } from 'components/MainHeading';
 import { Section } from 'components/Section';
@@ -33,11 +34,11 @@ const SignIn = () => {
             <MainHeading>Sign In</MainHeading>
             <Form>
               {renderFormFields(Object.keys(initialValues))}
-              <Button type='submit'>Login</Button>
-              <p>
-                Not a member? <Link to='/signup'>Sign up</Link>
-              </p>
+              <Button type='submit'>Sign In</Button>
             </Form>
+            <p>
+              Not a member? <Link to='/signup'>Sign up</Link>
+            </p>
           </Section>
         );
       }}
