@@ -3,9 +3,8 @@ import GamesService from 'services/Games';
 
 export const gamesFetch = (page = 1, limit = 10) => async dispatch => {
   try {
-    const offset = (page - 1) * limit;
     dispatch(actions.gamesFetchStart());
-    const games = await GamesService.fetch(offset, limit);
+    const games = await GamesService.fetch(page, limit);
     dispatch(actions.gamesFetchSuccess(games));
   } catch (error) {
     dispatch(actions.gamesFetchFailure(error));

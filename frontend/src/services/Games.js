@@ -8,11 +8,12 @@ export default {
   fetchById(id) {
     return instance.get(`/${id}`).then(response => response.data);
   },
-  fetchMany(limit) {
-    return instance
-      .get('/', {
+  fetch(page, limit) {
+    return axios
+      .get('http://localhost:3030/api/games', {
         params: {
-          limit
+          limit,
+          page
         }
       })
       .then(response => response.data);

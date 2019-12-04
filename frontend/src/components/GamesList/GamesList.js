@@ -4,7 +4,7 @@ import { Pagination } from '../Pagination/Pagination';
 
 import * as S from './GamesList.styles';
 
-const GamesList = ({ games }) => (
+const GamesList = ({ games, gamesFetch }) => (
   <S.GamesListWrapper>
     {games.map(({ _id, genres, name, summary }) => (
       <GamesListItem

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Ul = styled.ul`
   display: inline-block;
+  align-self: center;
 `;
 
 const Li = styled.li`

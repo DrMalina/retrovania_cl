@@ -23,7 +23,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  gamesFetch: limit => dispatch(gamesFetch(limit))
+  gamesFetch: page => dispatch(gamesFetch(page))
 });
 
 const EnhancedGamesListContainer = compose(
