@@ -1,15 +1,21 @@
 import axios from 'axios';
 
+const instance = axios.create({
+  baseURL: 'http://localhost:3030/api/games'
+});
+
 export default {
-  fetch(limit) {
-    return axios
-      .get('http://localhost:3030/api/games', {
+  fetchById(id) {
+    return instance.get(`/${id}`).then(response => response.data);
+  },
+
+  fetchMany(limit) {
+    return instance
+      .get('/', {
         params: {
           limit
         }
       })
-      .then(response => {
-        return response.data;
-      });
+      .then(response => response.data);
   }
 };
