@@ -1,15 +1,39 @@
 import React from 'react';
-import './Game.css';
 
-const Game = ({ name, summary, genres, firstReleaseDate, cover }) => {
+import { Button } from 'components/Button';
+import { Link } from 'components/Link';
+
+import * as S from './Game.styles';
+
+const Game = ({ game, isUserLoggedIn }) => {
+  const renderActions = () =>
+    isUserLoggedIn ? (
+      <Button>Rent it</Button>
+    ) : (
+      <p>
+        <Link to='/signin'>Sign in</Link> or <Link to='/signup'>Sign up</Link>{' '}
+        to rent this game.
+      </p>
+    );
+
   return (
-    <div className='Game'>
-      <h2>{name}</h2>
-      <img src={cover} />
-      <p>{new Date(firstReleaseDate * 1000).toDateString()}</p>
-      <p>{genres.join(' ')}</p>
-      <p>{summary}</p>
-    </div>
+    game && (
+      <S.GameWrapper>
+        <S.GameTitle>{game.name}</S.GameTitle>
+        <S.GameSummary>{game.summary}</S.GameSummary>
+        <S.GameReleaseDate>
+          {'Release date: '}
+          <S.GameHighlight>
+            {new Date(game.firstReleaseDate * 1000).toLocaleDateString()}
+          </S.GameHighlight>
+        </S.GameReleaseDate>
+        <S.GameGenres>
+          {'Genres: '}
+          <S.GameHighlight>{game.genres.join(', ')}</S.GameHighlight>
+        </S.GameGenres>
+        <S.GameActions>{renderActions()}</S.GameActions>
+      </S.GameWrapper>
+    )
   );
 };
 

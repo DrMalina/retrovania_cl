@@ -1,1 +1,1 @@
-export { Game } from './Game';
+export { GameContainer as Game } from './Game.Container';

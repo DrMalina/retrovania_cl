@@ -9,6 +9,7 @@ import { Hero } from 'components/Hero';
 import { Navigation } from 'components/Navigation';
 
 import { Home } from 'pages/Home';
+import { Game } from 'pages/Game';
 import { Games } from 'pages/Games';
 import { SignIn } from 'pages/SignIn';
 import { SignUp } from 'pages/SignUp';
@@ -27,7 +28,8 @@ const App = () => {
         <main>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/games' component={Games} />
+            <Route exact path='/games' component={Games} />
+            <Route path='/games/:id' component={Game} />
             <Route path='/signin' component={SignIn} />
             <Route path='/signup' component={SignUp} />
           </Switch>

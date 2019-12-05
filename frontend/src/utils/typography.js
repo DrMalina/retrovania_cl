@@ -12,6 +12,7 @@ const typography = {
     xLarge: '3.6rem'
   },
   weights: {
+    bold: 700,
     medium: 500,
     regular: 400
   }
