@@ -23,16 +23,16 @@ export const signInFailure = error => {
 };
 
 export const signOutInit = () => ({
-  type: types.SIGN_OUT_INIT,
+  type: types.SIGN_OUT_INIT
 });
 
 export const signOutSuccess = () => ({
-  type: types.SIGN_OUT_SUCCESS,
+  type: types.SIGN_OUT_SUCCESS
 });
 
-export const signOutFailure = (error) => ({
+export const signOutFailure = error => ({
   type: types.SIGN_OUT_SUCCESS,
   meta: {
-    error,
-  },
-})
+    error
+  }
+});

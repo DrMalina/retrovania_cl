@@ -23,8 +23,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         error: null,
         current: null,
-        loading: false,
-      }
+        loading: false
+      };
     case types.SIGN_IN_FAILURE:
     case types.SIGN_OUT_FAILURE:
       return {

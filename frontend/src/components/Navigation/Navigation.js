@@ -20,22 +20,22 @@ const Navigation = ({ currentUser, deauthenticate, location }) => {
           <S.NavItem>
             <S.NavLink to='/games'>Browse games</S.NavLink>
           </S.NavItem>
-          {
-            currentUser ? (
+          {currentUser ? (
+            <S.NavItem>
+              <S.NavLink to='#' onClick={() => deauthenticate()}>
+                Sign out
+              </S.NavLink>
+            </S.NavItem>
+          ) : (
+            <>
               <S.NavItem>
-                <S.NavLink to='#' onClick={() => deauthenticate()}>Sign out</S.NavLink>
+                <S.NavLink to='/signin'>Sign in</S.NavLink>
               </S.NavItem>
-            ) : (
-              <>
-                <S.NavItem>
-                  <S.NavLink to='/signin'>Sign in</S.NavLink>
-                </S.NavItem>
-                <S.NavItem>
-                  <S.NavLink to='/signup'>Sign up</S.NavLink>
-                </S.NavItem>
-              </>
-            )
-          }
+              <S.NavItem>
+                <S.NavLink to='/signup'>Sign up</S.NavLink>
+              </S.NavItem>
+            </>
+          )}
         </S.NavItemsWrapper>
       </S.NavList>
     </S.Nav>

@@ -7,11 +7,11 @@ export const signInReq = (route, formValues) => async dispatch => {
     dispatch(actions.signInInit());
     const response = await User.authenticate(route, formValues);
     dispatch(actions.signInSuccess(response.data.user));
-    await localStorage.setItem('token', JSON.stringify(response.data.token));
-    axios.defaults.headers.common.Authorization = `Bearer ${ response.data.token }`;
+    localStorage.setItem('token', JSON.stringify(response.data.token));
+    axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
   } catch (error) {
     dispatch(actions.signInFailure(error));
-    if (localStorage.token) await localStorage.removeItem('token');
+    if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
   }
 };
@@ -21,11 +21,11 @@ export const deauthenticate = () => async dispatch => {
     dispatch(actions.signOutInit());
     const response = await User.deauthenticate();
     dispatch(actions.signOutSuccess(response.data.user));
-    if (localStorage.token) await localStorage.removeItem('token');
+    if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
   } catch (error) {
     dispatch(actions.signOutFailure(error));
-    if (localStorage.token) await localStorage.removeItem('token');
+    if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
   }
 };

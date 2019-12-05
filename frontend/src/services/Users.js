@@ -7,5 +7,5 @@ export default {
 
   deauthenticate() {
     return axios.post('http://localhost:3030/api/users/signout');
-  },
+  }
 };
