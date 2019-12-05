@@ -24,7 +24,7 @@ router.get('/', passport.authenticate('jwt', { session: false }), usersControlle
 
 // U for UPDATE:
 
-router.put('/', passport.authenticate('jwt', { session: false }), usersControllers.updateCurrent);
+router.patch('/', passport.authenticate('jwt', { session: false }), usersControllers.updateCurrent);
 
 // D for DELETE:
 
