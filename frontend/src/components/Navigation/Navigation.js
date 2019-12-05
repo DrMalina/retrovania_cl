@@ -5,7 +5,8 @@ import * as S from './Navigation.styles';
 
 import logo from 'assets/images/logo.png';
 
-const Navigation = ({ location }) => {
+const Navigation = ({ currentUser, deauthenticate, location }) => {
+  console.log(currentUser);
   return (
     <S.Nav location={location}>
       <S.NavList>
@@ -20,12 +21,22 @@ const Navigation = ({ location }) => {
           <S.NavItem>
             <S.NavLink to='/games'>Browse games</S.NavLink>
           </S.NavItem>
-          <S.NavItem>
-            <S.NavLink to='/signin'>Sign in</S.NavLink>
-          </S.NavItem>
-          <S.NavItem>
-            <S.NavLink to='/signup'>Sign up</S.NavLink>
-          </S.NavItem>
+          {
+            currentUser ? (
+              <S.NavItem>
+                <S.NavLink to='#' onClick={() => deauthenticate()}>Sign out</S.NavLink>
+              </S.NavItem>
+            ) : (
+              <>
+                <S.NavItem>
+                  <S.NavLink to='/signin'>Sign in</S.NavLink>
+                </S.NavItem>
+                <S.NavItem>
+                  <S.NavLink to='/signup'>Sign up</S.NavLink>
+                </S.NavItem>
+              </>
+            )
+          }
         </S.NavItemsWrapper>
       </S.NavList>
     </S.Nav>

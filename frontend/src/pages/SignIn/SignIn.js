@@ -24,7 +24,7 @@ const SignIn = () => {
         password: fieldValidation('Password is required')
       })}
       onSubmit={({ email, password }) => {
-        dispatch(signInReq({ email, password }, '/signin'));
+        dispatch(signInReq('signin', { email, password }));
       }}
     >
       {formikProps => {

@@ -22,9 +22,17 @@ export const signInFailure = error => {
   };
 };
 
-export const signOut = () => {
-  // TODO
-  return {
-    type: types.SIGN_OUT
-  };
-};
+export const signOutInit = () => ({
+  type: types.SIGN_OUT_INIT,
+});
+
+export const signOutSuccess = () => ({
+  type: types.SIGN_OUT_SUCCESS,
+});
+
+export const signOutFailure = (error) => ({
+  type: types.SIGN_OUT_SUCCESS,
+  meta: {
+    error,
+  },
+})
