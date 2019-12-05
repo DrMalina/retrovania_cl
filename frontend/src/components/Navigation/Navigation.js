@@ -6,7 +6,6 @@ import * as S from './Navigation.styles';
 import logo from 'assets/images/logo.png';
 
 const Navigation = ({ currentUser, deauthenticate, location }) => {
-  console.log(currentUser);
   return (
     <S.Nav location={location}>
       <S.NavList>
