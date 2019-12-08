@@ -17,9 +17,10 @@ const LI = styled.li`
     text-shadow: 0px 0px 10px;
   }
 
+  ${props => props.active && `a {color: yellow;}`}
   ${props =>
     props.disabled &&
-    `$ > a {color: red;
+    `a {color: red;
     cursor: not-allowed;}`}
 `;
 export { Ul, LI };

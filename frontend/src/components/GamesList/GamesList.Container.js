@@ -5,14 +5,13 @@ import { errorHandlerLocal } from 'components/errorHandlerLocal';
 import { GamesList } from './GamesList';
 import { withSpinnerLocal } from 'components/withSpinnerLocal';
 import { gamesFetch } from 'redux/games/utils';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const GamesListContainer = ({ games, gamesFetch, total }) => {
   const location = useLocation();
 
   useEffect(() => {
     let params = new URLSearchParams(location.search);
-    console.log(params.get('page'));
     gamesFetch(params.get('page'));
   }, [location]);
 

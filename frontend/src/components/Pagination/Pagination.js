@@ -9,41 +9,45 @@ export const Pagination = props => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log('dgdg');
-
-    let params = new URLSearchParams(location.search);
-    setActivePage(params.get('page'));
+    const params = new URLSearchParams(location.search);
+    const page = params.get('page');
+    if (page) {
+      setActivePage(+page);
+    }
   }, [location]);
 
   const onClickPrevious = event => {
-    console.log('active page', activePage);
-
     if (activePage === 1) {
       event.preventDefault();
+      event.stopPropagation();
       return;
     }
   };
 
-  const onClickNext = () => {
+  const onClickNext = event => {
     if (activePage === props.pageCount) {
+      event.preventDefault();
+      event.stopPropagation();
       return;
     }
   };
 
   const createPages = () => {
     return Array.from(Array(props.pageCount).keys()).map((el, index) => (
-      <S.LI key={index}>
+      <S.LI key={index} active={activePage == index + 1}>
         <Link to={`/games?page=${index + 1}`}>{index + 1}</Link>
       </S.LI>
     ));
   };
 
-  console.log('before return acrie', activePage);
-
   return (
     <S.Ul>
       <S.LI disabled={activePage === 1}>
-        <Link onClick={onClickPrevious} to={`/games?page=${activePage - 1}`}>
+        <Link
+          disabled={activePage === 1}
+          onClick={onClickPrevious}
+          to={`/games?page=${activePage - 1}`}
+        >
           Previous
         </Link>
       </S.LI>
