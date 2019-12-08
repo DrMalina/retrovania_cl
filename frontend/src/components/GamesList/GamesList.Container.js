@@ -5,13 +5,16 @@ import { errorHandlerLocal } from 'components/errorHandlerLocal';
 import { GamesList } from './GamesList';
 import { withSpinnerLocal } from 'components/withSpinnerLocal';
 import { gamesFetch } from 'redux/games/utils';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const GamesListContainer = ({ games, gamesFetch, total }) => {
+  const location = useLocation();
+
   useEffect(() => {
-    if (games.length === 0) {
-      gamesFetch();
-    }
-  }, []);
+    let params = new URLSearchParams(location.search);
+    console.log(params.get('page'));
+    gamesFetch(params.get('page'));
+  }, [location]);
 
   return <GamesList games={games} gamesFetch={gamesFetch} total={total} />;
 };
@@ -32,7 +35,7 @@ const EnhancedGamesListContainer = compose(
     mapStateToProps,
     mapDispatchToProps
   ),
-  withSpinnerLocal, // Commented out because it is causing infinite re-rendering of games list. Spinner should not be a HOC but a component inside a page
+  //withSpinnerLocal, // Commented out because it is causing infinite re-rendering of games list. Spinner should not be a HOC but a component inside a page
   errorHandlerLocal
 )(GamesListContainer);
 

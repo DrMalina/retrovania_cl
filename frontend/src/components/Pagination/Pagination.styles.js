@@ -5,15 +5,21 @@ const Ul = styled.ul`
   align-self: center;
 `;
 
-const Li = styled.li`
+const LI = styled.li`
   float: left;
   padding: 8px 10px;
   text-decoration: none;
   list-style-type: none;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(110%);
+    text-shadow: 0px 0px 10px;
+  }
 
   ${props =>
     props.disabled &&
-    `pointer-events:none; 
-      color: #ddd;`}
+    `$ > a {color: red;
+    cursor: not-allowed;}`}
 `;
-export { Ul, Li };
+export { Ul, LI };

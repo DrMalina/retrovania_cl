@@ -1,50 +1,58 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import * as S from './Pagination.styles';
+import { Link } from 'react-router-dom';
 
 export const Pagination = props => {
   const [activePage, setActivePage] = React.useState(1);
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log('dgdg');
+
+    let params = new URLSearchParams(location.search);
+    setActivePage(params.get('page'));
+  }, [location]);
+
+  const onClickPrevious = event => {
+    console.log('active page', activePage);
+
+    if (activePage === 1) {
+      event.preventDefault();
+      return;
+    }
+  };
+
   const onClickNext = () => {
-    console.log('next:', activePage, props.pageCount);
     if (activePage === props.pageCount) {
       return;
     }
-    const nextPage = activePage + 1;
-    setActivePage(nextPage);
-    props.onClick(nextPage);
-  };
-  const onClickPrevious = () => {
-    if (activePage === 1) {
-      return;
-    }
-    const previousPage = activePage - 1;
-    setActivePage(previousPage);
-    props.onClick(previousPage);
-  };
-  const onClick = page => {
-    console.log('page: ', page);
-    console.log('active page', activePage);
-    setActivePage(page);
-    props.onClick(page);
   };
 
   const createPages = () => {
     return Array.from(Array(props.pageCount).keys()).map((el, index) => (
-      <S.Li onClick={() => onClick(index + 1)} key={index}>
-        {index + 1}
-      </S.Li>
+      <S.LI key={index}>
+        <Link to={`/games?page=${index + 1}`}>{index + 1}</Link>
+      </S.LI>
     ));
   };
 
+  console.log('before return acrie', activePage);
+
   return (
     <S.Ul>
-      <S.Li onClick={onClickPrevious} disabled={activePage === 1}>
-        Previous
-      </S.Li>
+      <S.LI disabled={activePage === 1}>
+        <Link onClick={onClickPrevious} to={`/games?page=${activePage - 1}`}>
+          Previous
+        </Link>
+      </S.LI>
       {createPages()}
-      <S.Li onClick={onClickNext} disabled={activePage === props.pageCount}>
-        Next
-      </S.Li>
+      <S.LI disabled={activePage === props.pageCount}>
+        <Link onClick={onClickNext} to={`/games?page=${activePage + 1}`}>
+          Next
+        </Link>
+      </S.LI>
     </S.Ul>
   );
 };
