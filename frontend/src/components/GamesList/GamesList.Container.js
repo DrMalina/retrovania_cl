@@ -11,7 +11,7 @@ const GamesListContainer = ({ games, gamesFetch, total, isLoading }) => {
   const location = useLocation();
 
   useEffect(() => {
-    let params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(location.search);
     gamesFetch(params.get('page'));
   }, [location]);
 

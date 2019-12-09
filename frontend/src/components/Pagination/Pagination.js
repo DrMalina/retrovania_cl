@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import * as S from './Pagination.styles';
-import { Link } from 'react-router-dom';
+import { Link } from 'components/Link';
 
 export const Pagination = props => {
-  const [activePage, setActivePage] = React.useState(1);
+  const [activePage, setActivePage] = useState(1);
   const location = useLocation();
 
   useEffect(() => {
@@ -16,11 +16,8 @@ export const Pagination = props => {
     }
   }, [location]);
 
-  const handleClick = (event, next) => {
-    if (
-      (activePage === props.pageCount && next) ||
-      (activePage === 1 && !next)
-    ) {
+  const handleArrowLinkClick = (event, page) => {
+    if (activePage === page) {
       event.preventDefault();
       return;
     }
@@ -39,7 +36,7 @@ export const Pagination = props => {
       <S.LI disabled={activePage === 1}>
         <Link
           disabled={activePage === 1}
-          onClick={e => handleClick(e, false)}
+          onClick={e => handleArrowLinkClick(e, 1)}
           to={`/games?page=${activePage - 1}`}
         >
           Previous
@@ -48,7 +45,7 @@ export const Pagination = props => {
       {createPages()}
       <S.LI disabled={activePage === props.pageCount}>
         <Link
-          onClick={e => handleClick(e, true)}
+          onClick={e => handleArrowLinkClick(e, props.pageCount)}
           to={`/games?page=${activePage + 1}`}
         >
           Next
