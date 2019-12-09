@@ -8,9 +8,9 @@ export default {
   fetchById(id) {
     return instance.get(`/${id}`).then(response => response.data);
   },
-  fetch(page, limit) {
-    return axios
-      .get('http://localhost:3030/api/games', {
+  fetchMany(page, limit) {
+    return instance
+      .get('/', {
         params: {
           limit,
           page

@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import * as S from './Pagination.styles';
 import { Link } from 'react-router-dom';
