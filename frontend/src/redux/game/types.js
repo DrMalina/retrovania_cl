@@ -1,3 +1,4 @@
+export const GAME_CLEANUP = 'GAME_CLEANUP';
 export const GAME_FETCH = 'GAME_FETCH';
 export const GAME_FETCH_SUCCESS = 'GAME_FETCH_SUCCESS';
 export const GAME_FETCH_FAILURE = 'GAME_FETCH_FAILURE';

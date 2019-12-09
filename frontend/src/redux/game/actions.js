@@ -1,5 +1,9 @@
 import * as types from './types';
 
+export const gameCleanup = () => ({
+  type: types.GAME_CLEANUP
+});
+
 export const gameFetchStart = () => ({
   type: types.GAME_FETCH
 });
