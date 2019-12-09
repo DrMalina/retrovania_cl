@@ -16,18 +16,12 @@ export const Pagination = props => {
     }
   }, [location]);
 
-  const onClickPrevious = event => {
-    if (activePage === 1) {
+  const handleClick = (event, next) => {
+    if (
+      (activePage === props.pageCount && next) ||
+      (activePage === 1 && !next)
+    ) {
       event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-  };
-
-  const onClickNext = event => {
-    if (activePage === props.pageCount) {
-      event.preventDefault();
-      event.stopPropagation();
       return;
     }
   };
@@ -45,7 +39,7 @@ export const Pagination = props => {
       <S.LI disabled={activePage === 1}>
         <Link
           disabled={activePage === 1}
-          onClick={onClickPrevious}
+          onClick={e => handleClick(e, false)}
           to={`/games?page=${activePage - 1}`}
         >
           Previous
@@ -53,7 +47,10 @@ export const Pagination = props => {
       </S.LI>
       {createPages()}
       <S.LI disabled={activePage === props.pageCount}>
-        <Link onClick={onClickNext} to={`/games?page=${activePage + 1}`}>
+        <Link
+          onClick={e => handleClick(e, true)}
+          to={`/games?page=${activePage + 1}`}
+        >
           Next
         </Link>
       </S.LI>
