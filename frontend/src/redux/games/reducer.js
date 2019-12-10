@@ -1,6 +1,6 @@
 import * as types from './types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   error: null,
   gamesInStore: [],
   loading: false,
