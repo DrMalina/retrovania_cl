@@ -29,9 +29,9 @@ const mapStateToProps = state => ({
   isLoading: state.games.loading
 });
 
-const mapDispatchToProps = dispatch => ({
-  gamesFetch: page => dispatch(gamesFetch(page))
-});
+const mapDispatchToProps = {
+  gamesFetch
+};
 
 const EnhancedGamesListContainer = compose(
   connect(

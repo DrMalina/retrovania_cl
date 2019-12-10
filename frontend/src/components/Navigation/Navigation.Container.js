@@ -1,18 +1,20 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Navigation } from './Navigation';
-import { signOutReq } from '../../redux/users/utils';
+import { signOutReq } from 'redux/users/utils';
 
 const mapStateToProps = state => ({
   currentUser: state.user.current
 });
 
+const mapDispatchToProps = {
+  signOutReq
+};
+
 const EnhancedNavigationContainer = compose(
   connect(
     mapStateToProps,
-    {
-      signOutReq
-    }
+    mapDispatchToProps
   )
 )(Navigation);
 

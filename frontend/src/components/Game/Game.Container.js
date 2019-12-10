@@ -38,10 +38,10 @@ const mapStateToProps = state => ({
   isUserLoggedIn: !!state.user.current
 });
 
-const mapDispatchToProps = dispatch => ({
-  gameFetch: id => dispatch(gameFetch(id)),
-  gameCleanup: () => dispatch(gameCleanup())
-});
+const mapDispatchToProps = {
+  gameFetch,
+  gameCleanup
+};
 
 const EnhancedGameContainer = compose(
   connect(
