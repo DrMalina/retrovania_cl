@@ -2,8 +2,9 @@ const { ExtractJwt } = require('passport-jwt');
 const JwtStrategy = require('passport-jwt').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
-const config = require('../config/config');
-const User = require('../models/User');
+
+const config = require('config/config');
+const User = require('models/User');
 
 passport.use(
   new JwtStrategy(

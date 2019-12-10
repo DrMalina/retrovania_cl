@@ -2,7 +2,8 @@ const { compare, genSalt, hash } = require('bcryptjs');
 const { isEmail } = require('validator');
 const { sign } = require('jsonwebtoken');
 const mongoose = require('mongoose');
-const config = require('../config/config');
+
+const config = require('config/config');
 
 const schema = new mongoose.Schema(
   {
