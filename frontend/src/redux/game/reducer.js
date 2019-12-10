@@ -8,6 +8,11 @@ const INITIAL_STATE = {
 
 export default function gameReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case types.GAME_CLEANUP:
+      return {
+        ...state,
+        ...INITIAL_STATE
+      };
     case types.GAME_FETCH:
       return {
         ...state,

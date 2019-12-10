@@ -6,13 +6,26 @@ import { errorHandlerLocal } from 'components/errorHandlerLocal';
 import { withSpinnerLocal } from 'components/withSpinnerLocal';
 import { Game } from './Game';
 
+import { gameCleanup } from 'redux/game/actions';
 import { gameFetch } from 'redux/game/utils';
 
-const GameContainer = ({ id, isUserLoggedIn, game, gameFetch }) => {
+const GameContainer = ({
+  id,
+  isUserLoggedIn,
+  game,
+  gameFetch,
+  gameCleanup
+}) => {
   useEffect(() => {
     if (!game || game._id !== id) {
       gameFetch(id);
     }
+
+    return () => {
+      if (game) {
+        gameCleanup();
+      }
+    };
   }, []);
 
   return <Game game={game} isUserLoggedIn={isUserLoggedIn} />;
@@ -25,9 +38,10 @@ const mapStateToProps = state => ({
   isUserLoggedIn: !!state.user.current
 });
 
-const mapDispatchToProps = dispatch => ({
-  gameFetch: id => dispatch(gameFetch(id))
-});
+const mapDispatchToProps = {
+  gameFetch,
+  gameCleanup
+};
 
 const EnhancedGameContainer = compose(
   connect(

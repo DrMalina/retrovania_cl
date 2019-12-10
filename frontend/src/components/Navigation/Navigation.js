@@ -5,7 +5,7 @@ import * as S from './Navigation.styles';
 
 import logo from 'assets/images/logo.png';
 
-const Navigation = ({ currentUser, deauthenticate, location }) => {
+const Navigation = ({ currentUser, signOutReq, location }) => {
   return (
     <S.Nav location={location}>
       <S.NavList>
@@ -22,7 +22,7 @@ const Navigation = ({ currentUser, deauthenticate, location }) => {
           </S.NavItem>
           {currentUser ? (
             <S.NavItem>
-              <S.NavLink to='#' onClick={() => deauthenticate()}>
+              <S.NavLink to='#' onClick={() => signOutReq()}>
                 Sign out
               </S.NavLink>
             </S.NavItem>

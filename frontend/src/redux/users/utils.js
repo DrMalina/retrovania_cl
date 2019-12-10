@@ -16,7 +16,7 @@ export const signInReq = (route, formValues) => async dispatch => {
   }
 };
 
-export const deauthenticate = () => async dispatch => {
+export const signOutReq = () => async dispatch => {
   try {
     dispatch(actions.signOutInit());
     const response = await User.deauthenticate();

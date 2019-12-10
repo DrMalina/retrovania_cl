@@ -1,11 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { store } from 'redux/store';
 
+import { AppRoute } from 'components/AppRoute';
 import { Footer } from 'components/Footer';
-import { Hero } from 'components/Hero';
 import { Navigation } from 'components/Navigation';
 
 import { Home } from 'pages/Home';
@@ -24,14 +24,13 @@ const App = () => {
       <Router>
         <S.GlobalStyle />
         <Navigation />
-        <Route exact path='/' component={Hero} />
         <main>
           <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/games' component={Games} />
-            <Route path='/games/:id' component={Game} />
-            <Route path='/signin' component={SignIn} />
-            <Route path='/signup' component={SignUp} />
+            <AppRoute exact path='/' component={Home} />
+            <AppRoute exact path='/games' component={Games} />
+            <AppRoute path='/games/:id' component={Game} />
+            <AppRoute path='/signin' component={SignIn} />
+            <AppRoute path='/signup' component={SignUp} />
           </Switch>
         </main>
         <Footer />
