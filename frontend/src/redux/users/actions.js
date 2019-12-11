@@ -1,37 +1,38 @@
-import * as types from './types';
+import {
+  SIGN_IN_INIT,
+  SIGN_IN_FAILURE,
+  SIGN_IN_SUCCESS,
+  SIGN_OUT_INIT,
+  SIGN_OUT_FAILURE,
+  SIGN_OUT_SUCCESS
+} from './types';
 
-export const signInInit = () => {
-  return {
-    type: types.SIGN_IN_INIT
-  };
-};
+export const signInInit = () => ({
+  type: SIGN_IN_INIT
+});
 
-export const signInSuccess = userInfo => {
-  return {
-    type: types.SIGN_IN_SUCCESS,
-    payload: userInfo
-  };
-};
+export const signInSuccess = userInfo => ({
+  type: SIGN_IN_SUCCESS,
+  payload: userInfo
+});
 
-export const signInFailure = error => {
-  return {
-    type: types.SIGN_IN_FAILURE,
-    meta: {
-      error
-    }
-  };
-};
+export const signInFailure = error => ({
+  type: SIGN_IN_FAILURE,
+  meta: {
+    error
+  }
+});
 
 export const signOutInit = () => ({
-  type: types.SIGN_OUT_INIT
+  type: SIGN_OUT_INIT
 });
 
 export const signOutSuccess = () => ({
-  type: types.SIGN_OUT_SUCCESS
+  type: SIGN_OUT_SUCCESS
 });
 
 export const signOutFailure = error => ({
-  type: types.SIGN_OUT_SUCCESS,
+  type: SIGN_OUT_FAILURE,
   meta: {
     error
   }
