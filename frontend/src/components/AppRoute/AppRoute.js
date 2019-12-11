@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, useHistory } from 'react-router-dom';
+import { Route, useHistory, useLocation } from 'react-router-dom';
 
-const AppRoute = props => {
-  const { component: Component, path, ...rest } = props;
+const AppRoute = ({ component: Component, path, ...rest }) => {
+  const { state } = useLocation();
   const currentUser = useSelector(state => state.user.current);
   const history = useHistory();
 
-  if ((path === '/signin' || path === '/signup') && currentUser) {
-    history.goBack();
-  }
+  useEffect(() => {
+    if (currentUser) {
+      if (state && state.goBack) {
+        history.goBack();
+      } else {
+        history.push('/');
+      }
+    }
+  }, [currentUser]);
 
   return (
     <Route

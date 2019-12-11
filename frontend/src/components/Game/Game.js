@@ -11,7 +11,13 @@ const Game = ({ game, isUserLoggedIn }) => {
       <Button>Rent it</Button>
     ) : (
       <p>
-        <Link to='/signin'>Sign in</Link> or <Link to='/signup'>Sign up</Link>{' '}
+        <Link to={{ pathname: '/signin', state: { goBack: true } }}>
+          Sign in
+        </Link>{' '}
+        or{' '}
+        <Link to={{ pathname: '/signup', state: { goBack: true } }}>
+          Sign up
+        </Link>{' '}
         to rent this game.
       </p>
     );
