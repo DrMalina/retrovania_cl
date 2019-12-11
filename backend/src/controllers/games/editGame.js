@@ -1,14 +1,12 @@
-const Game = require('../../models/Game');
+const Game = require('models/Game');
 
 async function editGame(req, res, next) {
   try {
-    Game.findByIdAndUpdate(req.params.gameId, { $set: req.body }, function(err) {
-      if (err) {
-        res.status(500).send(err);
-      }
-      res.send('OK');
-    });
+    await Game.updateOne({ _id: req.params.gameId }, { $set: req.body });
+    const game = await Game.findById(req.params.gameId);
+    res.status(200).send(game);
   } catch (err) {
+    res.status(500).send(err);
     next(err);
   }
 }
