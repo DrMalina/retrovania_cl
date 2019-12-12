@@ -1,22 +1,27 @@
-import * as types from './types';
+import {
+  GAME_CLEANUP,
+  GAME_FETCH,
+  GAME_FETCH_FAILURE,
+  GAME_FETCH_SUCCESS
+} from './types';
 
 export const gameCleanup = () => ({
-  type: types.GAME_CLEANUP
+  type: GAME_CLEANUP
 });
 
 export const gameFetchStart = () => ({
-  type: types.GAME_FETCH
+  type: GAME_FETCH
 });
 
 export const gameFetchSuccess = game => ({
-  type: types.GAME_FETCH_SUCCESS,
+  type: GAME_FETCH_SUCCESS,
   payload: {
     game
   }
 });
 
 export const gameFetchFailure = error => ({
-  type: types.GAME_FETCH_FAILURE,
+  type: GAME_FETCH_FAILURE,
   meta: {
     error
   }
