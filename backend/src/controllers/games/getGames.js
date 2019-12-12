@@ -1,6 +1,6 @@
 const { isInt } = require('validator');
 
-const Game = require('../../models/Game');
+const Game = require('models/Game');
 
 async function getGames(req, res, next) {
   try {

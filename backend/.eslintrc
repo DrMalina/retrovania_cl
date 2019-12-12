@@ -14,5 +14,12 @@
     "no-unused-vars": "warn",
     "prettier/prettier": "error",
     "consistent-return": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src"]
+      }
+    }
   }
 }

@@ -1,8 +1,9 @@
-const db = require('../database/database');
-const Game = require('../models/Game');
+const Game = require('models/Game');
+const Genre = require('models/Genre');
 const getCovers = require('./getCovers');
 const apiClient = require('./apiClient');
-const Genre = require('../models/Genre');
+
+require('database/database');
 
 const seedGames = () => {
   apiClient(

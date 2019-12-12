@@ -1,4 +1,4 @@
-const Cart = require('../../models/Cart');
+const Cart = require('models/Cart');
 
 async function fetchCurrent(req, res, next) {
   try {

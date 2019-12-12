@@ -1,6 +1,8 @@
-const db = require('../database/database');
-const Genre = require('../models/Genre');
+const Genre = require('models/Genre');
+
 const apiClient = require('./apiClient');
+
+require('database/database');
 
 const seedGenres = () => {
   apiClient('genres', 'fields name; limit 150;')

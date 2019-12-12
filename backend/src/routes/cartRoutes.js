@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const passport = require('passport');
 
-const cartControllers = require('../controllers/cart');
+const cartControllers = require('controllers/cart');
 
 const router = Router();
 
