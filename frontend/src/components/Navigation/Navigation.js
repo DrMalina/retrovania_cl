@@ -21,11 +21,16 @@ const Navigation = ({ currentUser, signOutReq, location }) => {
             <S.NavLink to='/games'>Browse games</S.NavLink>
           </S.NavItem>
           {currentUser ? (
-            <S.NavItem>
-              <S.NavLink to='#' onClick={() => signOutReq()}>
-                Sign out
-              </S.NavLink>
-            </S.NavItem>
+            <>
+              <S.NavItem>
+                <S.NavLink to='/cart'>Cart</S.NavLink>
+              </S.NavItem>
+              <S.NavItem>
+                <S.NavLink to='#' onClick={() => signOutReq()}>
+                  Sign out
+                </S.NavLink>
+              </S.NavItem>
+            </>
           ) : (
             <>
               <S.NavItem>

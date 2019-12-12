@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Route, useHistory, useLocation } from 'react-router-dom';
+import { Redirect, Route, useHistory, useLocation } from 'react-router-dom';
 
-const AppRoute = ({ component: Component, path, ...rest }) => {
+const AppRoute = ({ component: Component, requiresAuth = false, ...rest }) => {
   const { state } = useLocation();
   const currentUser = useSelector(state => state.user.current);
   const history = useHistory();
@@ -16,6 +16,10 @@ const AppRoute = ({ component: Component, path, ...rest }) => {
       }
     }
   }, [currentUser]);
+
+  if (requiresAuth && !currentUser) {
+    return <Redirect to='/signin' />;
+  }
 
   return (
     <Route
