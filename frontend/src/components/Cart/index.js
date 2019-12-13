@@ -1,1 +1,1 @@
-export { Cart } from './Cart';
+export { CartContainer as Cart } from './Cart.Container';

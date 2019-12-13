@@ -5,11 +5,15 @@ import { Link } from 'components/Link';
 
 import * as S from './Game.styles';
 
-const Game = ({ game, isUserLoggedIn }) => {
-  const renderActions = () =>
-    isUserLoggedIn ? (
-      <Button>Rent it</Button>
-    ) : (
+const Game = ({ cart, cartAddItem, game, isUserLoggedIn }) => {
+  const renderActions = () => {
+    if (isUserLoggedIn) {
+      if (cart.find(({ _id }) => _id === game._id)) {
+        return <p>This game is already in your cart.</p>;
+      }
+      return <Button onClick={() => cartAddItem(game)}>Rent it</Button>;
+    }
+    return (
       <p>
         <Link to={{ pathname: '/signin', state: { goBack: true } }}>
           Sign in
@@ -21,6 +25,7 @@ const Game = ({ game, isUserLoggedIn }) => {
         to rent this game.
       </p>
     );
+  };
 
   return (
     game && (

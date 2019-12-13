@@ -6,10 +6,13 @@ import { errorHandlerLocal } from 'components/errorHandlerLocal';
 import { withSpinnerLocal } from 'components/withSpinnerLocal';
 import { Game } from './Game';
 
+import { cartAddItem } from 'redux/cart/actions';
 import { gameCleanup } from 'redux/game/actions';
 import { gameFetch } from 'redux/game/utils';
 
 const GameContainer = ({
+  cart,
+  cartAddItem,
   id,
   isUserLoggedIn,
   game,
@@ -28,10 +31,18 @@ const GameContainer = ({
     };
   }, []);
 
-  return <Game game={game} isUserLoggedIn={isUserLoggedIn} />;
+  return (
+    <Game
+      cart={cart}
+      game={game}
+      isUserLoggedIn={isUserLoggedIn}
+      cartAddItem={cartAddItem}
+    />
+  );
 };
 
 const mapStateToProps = state => ({
+  cart: state.cart.current,
   error: state.game.error,
   game: state.game.current,
   isLoading: state.game.loading,
@@ -39,6 +50,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  cartAddItem,
   gameFetch,
   gameCleanup
 };
