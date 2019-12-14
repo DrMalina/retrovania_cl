@@ -8,6 +8,8 @@ const INITIAL_STATE = {
 
 export default function cartReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case types.CART_CLEANUP:
+      return INITIAL_STATE;
     case types.CART_FETCH:
       return {
         ...state,
