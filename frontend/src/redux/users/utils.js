@@ -1,4 +1,5 @@
 import * as actions from 'redux/users/actions';
+import { cartCleanup } from 'redux/cart/actions';
 import axios from 'axios';
 import User from 'services/Users';
 
@@ -11,6 +12,7 @@ export const reauthorize = token => async dispatch => {
     axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
   } catch (error) {
     dispatch(actions.signInFailure(error));
+    dispatch(cartCleanup());
     if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
   }
@@ -35,10 +37,12 @@ export const signOutReq = () => async dispatch => {
     dispatch(actions.signOutInit());
     const response = await User.deauthenticate();
     dispatch(actions.signOutSuccess(response.data.user));
+    dispatch(cartCleanup());
     if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
   } catch (error) {
     dispatch(actions.signOutFailure(error));
+    dispatch(cartCleanup());
     if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
   }
