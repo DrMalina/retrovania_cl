@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 
-import { store } from 'redux/store';
+import { persistor, store } from 'redux/store';
 
 import { AppRoute } from 'components/AppRoute';
 import { Footer } from 'components/Footer';
@@ -21,20 +22,22 @@ import 'normalize.css';
 const App = () => {
   return (
     <Provider store={store}>
-      <Router>
-        <S.GlobalStyle />
-        <Navigation />
-        <main>
-          <Switch>
-            <AppRoute exact path='/' component={Home} />
-            <AppRoute exact path='/games' component={Games} />
-            <AppRoute path='/games/:id' component={Game} />
-            <AppRoute path='/signin' component={SignIn} />
-            <AppRoute path='/signup' component={SignUp} />
-          </Switch>
-        </main>
-        <Footer />
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <S.GlobalStyle />
+          <Navigation />
+          <main>
+            <Switch>
+              <AppRoute exact path='/' component={Home} />
+              <AppRoute exact path='/games' component={Games} />
+              <AppRoute path='/games/:id' component={Game} />
+              <AppRoute path='/signin' component={SignIn} />
+              <AppRoute path='/signup' component={SignUp} />
+            </Switch>
+          </main>
+          <Footer />
+        </Router>
+      </PersistGate>
     </Provider>
   );
 };
