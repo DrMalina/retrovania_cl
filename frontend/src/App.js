@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
-import { Provider } from 'react-redux';
-
-import { persistor, store } from 'redux/store';
+import { connect } from 'react-redux'
 
 import { AppRoute } from 'components/AppRoute';
 import { Footer } from 'components/Footer';
@@ -15,31 +12,47 @@ import { Games } from 'pages/Games';
 import { SignIn } from 'pages/SignIn';
 import { SignUp } from 'pages/SignUp';
 
+import { reauthorize } from 'redux/users/utils';
+
 import * as S from './App.styles';
 
 import 'normalize.css';
 
-const App = () => {
+const App = ({ currentUser, reauthorize }) => {
+  useEffect(() => {
+    if (!currentUser) {
+      const token = JSON.parse(localStorage.getItem('token'));
+      if (token) {
+        reauthorize(token);
+      }
+    }
+  }, []);
+
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <S.GlobalStyle />
-          <Navigation />
-          <main>
-            <Switch>
-              <AppRoute exact path='/' component={Home} />
-              <AppRoute exact path='/games' component={Games} />
-              <AppRoute path='/games/:id' component={Game} />
-              <AppRoute path='/signin' component={SignIn} />
-              <AppRoute path='/signup' component={SignUp} />
-            </Switch>
-          </main>
-          <Footer />
-        </Router>
-      </PersistGate>
-    </Provider>
+    <Router>
+      <S.GlobalStyle />
+      <Navigation />
+      <main>
+        <Switch>
+          <AppRoute exact path='/' component={Home} />
+          <AppRoute exact path='/games' component={Games} />
+          <AppRoute path='/games/:id' component={Game} />
+          <AppRoute path='/signin' component={SignIn} />
+          <AppRoute path='/signup' component={SignUp} />
+        </Switch>
+      </main>
+      <Footer />
+    </Router>
   );
 };
 
-export default App;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.current
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    reauthorize
+  }
+)(App);
