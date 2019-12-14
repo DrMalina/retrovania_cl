@@ -8,7 +8,7 @@ import usersReducer from 'redux/users/reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['user'],
+  whitelist: ['user']
 };
 
 const rootReducer = combineReducers({

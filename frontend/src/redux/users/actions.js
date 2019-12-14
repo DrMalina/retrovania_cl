@@ -1,4 +1,5 @@
 import {
+  REAUTHORIZE,
   SIGN_IN_INIT,
   SIGN_IN_FAILURE,
   SIGN_IN_SUCCESS,
@@ -6,6 +7,10 @@ import {
   SIGN_OUT_FAILURE,
   SIGN_OUT_SUCCESS
 } from './types';
+
+export const reauthorize = () => ({
+  type: REAUTHORIZE
+});
 
 export const signInInit = () => ({
   type: SIGN_IN_INIT
