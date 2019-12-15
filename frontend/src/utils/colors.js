@@ -1,4 +1,8 @@
 const colors = {
+  backdrop: {
+    hex: '#000000',
+    rgb: '0, 0, 0'
+  },
   button: {
     background: {
       hex: '#35074f',
