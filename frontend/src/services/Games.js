@@ -19,6 +19,13 @@ export default {
       .then(response => response.data);
   },
   updateGame(game) {
-    return instance.put(`/${game.id}`).then(response => response.data);
+    const token = JSON.parse(localStorage.getItem('token'));
+    return instance
+      .put(`/${game._id}`, game, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then(response => response.data);
   }
 };
