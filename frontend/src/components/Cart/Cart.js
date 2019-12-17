@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Button } from 'components/Button';
+import { DateEditor } from 'components/DateEditor';
 import { Link } from 'components/Link';
 
 import * as S from './Cart.styles';
@@ -11,6 +12,8 @@ const Cart = ({ cart, cartRemoveItem }) =>
       <S.CartTableHead>
         <tr>
           <td>Game name</td>
+          <td>Date from</td>
+          <td>Date to</td>
           <td>Actions</td>
         </tr>
       </S.CartTableHead>
@@ -20,10 +23,18 @@ const Cart = ({ cart, cartRemoveItem }) =>
             <td>
               <Link to={`/games/${product._id}`}>{product.name}</Link>
             </td>
+            <td>{product.from}</td>
+            <td>{product.to}</td>
             <td>
               <Button onClick={() => cartRemoveItem(product._id)}>
                 Delete
               </Button>
+              <DateEditor
+                activator={({ setIsOpened }) => (
+                  <Button onClick={() => setIsOpened(true)}>Edit</Button>
+                )}
+                data={product}
+              />
             </td>
           </tr>
         ))}
