@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { GameDescription } from './GameDescription';
+import { GameEdit } from './GameEdit';
 
 import { Button } from 'components/Button';
 import { Link } from 'components/Link';
 
 import * as S from './Game.styles';
 
-const Game = ({ cart, cartAddItem, game, isUserLoggedIn }) => {
+const Game = ({ cart, cartAddItem, game, isUserLoggedIn, isUserAdmin }) => {
   const renderActions = () => {
     if (isUserLoggedIn) {
       if (cart.find(({ _id }) => _id === game._id)) {
@@ -27,23 +29,30 @@ const Game = ({ cart, cartAddItem, game, isUserLoggedIn }) => {
     );
   };
 
+  const [isEditEnable, setEditEnable] = useState(false);
+  const onClick = () => {
+    setEditEnable(true);
+  };
+
+  const editGame = () => {
+    if (isUserLoggedIn && isUserAdmin) {
+      return <Button onClick={onClick}>Edit</Button>;
+    }
+  };
+
   return (
     game && (
-      <S.GameWrapper>
-        <S.GameTitle>{game.name}</S.GameTitle>
-        <S.GameSummary>{game.summary}</S.GameSummary>
-        <S.GameReleaseDate>
-          {'Release date: '}
-          <S.GameHighlight>
-            {new Date(game.firstReleaseDate * 1000).toLocaleDateString()}
-          </S.GameHighlight>
-        </S.GameReleaseDate>
-        <S.GameGenres>
-          {'Genres: '}
-          <S.GameHighlight>{game.genres.join(', ')}</S.GameHighlight>
-        </S.GameGenres>
-        <S.GameActions>{renderActions()}</S.GameActions>
-      </S.GameWrapper>
+      <>
+        {isEditEnable ? (
+          <GameEdit game={game} />
+        ) : (
+          <GameDescription game={game} />
+        )}
+        <S.GameActions>
+          {renderActions()}
+          {editGame()}
+        </S.GameActions>
+      </>
     )
   );
 };
