@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import * as S from './Game.styles';
 import { Form } from 'components/Form/Form';
 import { Formik } from 'formik';
+import { Button } from 'components/Button';
+import { connect } from 'react-redux';
 import { updateGame } from 'redux/game/utils';
 
-const GameEdit = ({ game, updateGame }) => {
+const GameEdit = ({ game, updateGame, onEdit, onCancel }) => {
   const [values, setValues] = useState({
     ...game,
     firstReleaseDate: new Date(game.firstReleaseDate * 1000)
@@ -14,7 +16,6 @@ const GameEdit = ({ game, updateGame }) => {
   });
 
   const handleChange = event => {
-    console.log('--<>', event.target.name, event.target.value);
     event.preventDefault();
     setValues({
       ...values,
@@ -33,51 +34,61 @@ const GameEdit = ({ game, updateGame }) => {
       genres: values.genres.split(',')
     };
     updateGame(updatedGame);
+    onEdit();
   };
-  console.log(new Date(game.firstReleaseDate).getTime());
-  console.log(values.genres.split(', '));
 
   return (
-    <Formik>
-      <Form onSubmit={onSubmit}>
-        <S.GameWrapper>
-          <S.GameTitle>
-            <input value={values.name} name='name' onChange={handleChange} />
-          </S.GameTitle>
-
-          <S.GameSummary>
-            <textarea
-              rows={10}
-              name='summary'
-              onChange={handleChange}
-              value={values.summary}
-            />
-          </S.GameSummary>
-
-          <S.GameReleaseDate>
-            {'Release date: '}
-            <S.GameHighlight>
-              <input
-                type='date'
-                name='firstReleaseDate'
+    <Formik
+      initialValues={values}
+      onSubmit={(values, actions) => {
+        actions.setSubmitting(true);
+        onSubmit();
+      }}
+    >
+      {props => (
+        <Form onSubmit={props.handleSubmit}>
+          <Button type='submit'>Save</Button>
+          <Button type='button' onClick={onCancel}>
+            Cancel
+          </Button>
+          <S.GameWrapper>
+            <S.GameTitle>
+              <input value={values.name} name='name' onChange={handleChange} />
+            </S.GameTitle>
+            <S.GameSummary>
+              <textarea
+                rows={10}
+                name='summary'
                 onChange={handleChange}
-                value={values.firstReleaseDate}
+                value={values.summary}
               />
-            </S.GameHighlight>
-          </S.GameReleaseDate>
+            </S.GameSummary>
 
-          <S.GameGenres>
-            {'Genres: '}
-            <S.GameHighlight>
-              <input
-                value={values.genres}
-                name='genres'
-                onChange={handleChange}
-              />
-            </S.GameHighlight>
-          </S.GameGenres>
-        </S.GameWrapper>
-      </Form>
+            <S.GameReleaseDate>
+              {'Release date: '}
+              <S.GameHighlight>
+                <input
+                  type='date'
+                  name='firstReleaseDate'
+                  onChange={handleChange}
+                  value={values.firstReleaseDate}
+                />
+              </S.GameHighlight>
+            </S.GameReleaseDate>
+
+            <S.GameGenres>
+              {'Genres: '}
+              <S.GameHighlight>
+                <input
+                  value={values.genres}
+                  name='genres'
+                  onChange={handleChange}
+                />
+              </S.GameHighlight>
+            </S.GameGenres>
+          </S.GameWrapper>
+        </Form>
+      )}
     </Formik>
   );
 };
