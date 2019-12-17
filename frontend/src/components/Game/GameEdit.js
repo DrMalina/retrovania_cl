@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as S from './Game.styles';
 import { Form } from 'components/Form/Form';
 import { Formik } from 'formik';
-import { updateGame } from 'redux/games/utils';
+import { updateGame } from 'redux/game/utils';
 
 const GameEdit = ({ game, updateGame }) => {
   const [values, setValues] = useState({
@@ -82,4 +82,12 @@ const GameEdit = ({ game, updateGame }) => {
   );
 };
 
-export { GameEdit };
+const mapDispatchToProps = {
+  updateGame
+};
+const EnhancedGameEdit = connect(
+  null,
+  mapDispatchToProps
+)(GameEdit);
+
+export { EnhancedGameEdit as GameEdit };

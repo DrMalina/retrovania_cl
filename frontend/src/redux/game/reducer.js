@@ -32,6 +32,11 @@ export default function gameReducer(state = INITIAL_STATE, action) {
         error: action.meta.error,
         loading: false
       };
+    case types.GAME_UPDATE_SUCCESS:
+      return {
+        ...state,
+        current: action.payload.game
+      };
     default:
       return state;
   }
