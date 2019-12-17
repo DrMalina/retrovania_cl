@@ -8,6 +8,8 @@ import { Link } from 'components/Link';
 import * as S from './Game.styles';
 
 const Game = ({ cart, cartAddItem, game, isUserLoggedIn, isUserAdmin }) => {
+  const [isEditEnable, setEditEnable] = useState(false);
+
   const renderActions = () => {
     if (isUserLoggedIn) {
       if (cart.find(({ _id }) => _id === game._id)) {
@@ -29,14 +31,9 @@ const Game = ({ cart, cartAddItem, game, isUserLoggedIn, isUserAdmin }) => {
     );
   };
 
-  const [isEditEnable, setEditEnable] = useState(false);
-  const onClick = () => {
-    setEditEnable(true);
-  };
-
   const editGame = () => {
     if (isUserLoggedIn && isUserAdmin) {
-      return <Button onClick={onClick}>Edit</Button>;
+      return <Button onClick={() => setEditEnable(true)}>Edit</Button>;
     }
   };
 
@@ -44,14 +41,20 @@ const Game = ({ cart, cartAddItem, game, isUserLoggedIn, isUserAdmin }) => {
     game && (
       <>
         {isEditEnable ? (
-          <GameEdit game={game} />
+          <GameEdit
+            game={game}
+            onEdit={() => setEditEnable(false)}
+            onCancel={() => setEditEnable(false)}
+          />
         ) : (
-          <GameDescription game={game} />
+          <>
+            <GameDescription game={game} />
+            <S.GameActions>
+              {renderActions()}
+              {editGame()}
+            </S.GameActions>
+          </>
         )}
-        <S.GameActions>
-          {renderActions()}
-          {editGame()}
-        </S.GameActions>
       </>
     )
   );
