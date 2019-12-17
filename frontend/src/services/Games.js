@@ -17,5 +17,8 @@ export default {
         }
       })
       .then(response => response.data);
+  },
+  updateGame(game) {
+    return instance.put(`/${game.id}`).then(response => response.data);
   }
 };
