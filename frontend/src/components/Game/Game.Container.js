@@ -15,6 +15,7 @@ const GameContainer = ({
   cartAddItem,
   id,
   isUserLoggedIn,
+  isUserAdmin,
   game,
   gameFetch,
   gameCleanup
@@ -37,6 +38,7 @@ const GameContainer = ({
       game={game}
       isUserLoggedIn={isUserLoggedIn}
       cartAddItem={cartAddItem}
+      isUserAdmin={isUserAdmin}
     />
   );
 };
@@ -46,7 +48,8 @@ const mapStateToProps = state => ({
   error: state.game.error,
   game: state.game.current,
   isLoading: state.game.loading,
-  isUserLoggedIn: !!state.user.current
+  isUserLoggedIn: !!state.user.current,
+  isUserAdmin: !!state.user.current && state.user.current.role === 'admin'
 });
 
 const mapDispatchToProps = {
