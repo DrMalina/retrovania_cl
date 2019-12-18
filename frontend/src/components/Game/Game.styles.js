@@ -22,6 +22,7 @@ const GameActions = styled.div`
   grid-area: actions;
   justify-self: center;
   margin-top: 30px;
+  text-align: center;
 `;
 
 const GameGenres = styled.p`
