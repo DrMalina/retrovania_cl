@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { errorHandlerLocal } from 'components/errorHandlerLocal';
-import { GamesList } from './GamesList';
-import { SpinnerLocal } from 'components/SpinnerLocal';
 import { gamesFetch } from 'redux/games/utils';
 import { useLocation } from 'react-router-dom';
+
+import { GamesList } from './GamesList';
+
+import { errorHandlerLocal } from 'components/errorHandlerLocal';
+import { GamesFilter } from 'components/GamesFilter';
+import { SpinnerLocal } from 'components/SpinnerLocal';
 
 const GamesListContainer = ({ games, gamesFetch, total, isLoading }) => {
   const location = useLocation();
@@ -18,7 +21,10 @@ const GamesListContainer = ({ games, gamesFetch, total, isLoading }) => {
   return isLoading ? (
     <SpinnerLocal />
   ) : (
-    <GamesList games={games} gamesFetch={gamesFetch} total={total} />
+    <>
+      <GamesFilter />
+      <GamesList games={games} gamesFetch={gamesFetch} total={total} />
+    </>
   );
 };
 
