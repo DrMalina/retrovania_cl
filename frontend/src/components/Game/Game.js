@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { GameDescription } from './GameDescription';
-import { GameEdit } from './GameEdit';
 
 import { Button } from 'components/Button';
 import { Link } from 'components/Link';
 
+import { GameDescription } from './GameDescription';
+import { GameEdit } from './GameEdit';
 import * as S from './Game.styles';
 
 const Game = ({ cart, cartAddItem, game, isUserLoggedIn, isUserAdmin }) => {
-  const [isEditEnable, setEditEnable] = useState(false);
+  const [isEditEnabled, setEditEnabling] = useState(false);
 
   const renderActions = () => {
     if (isUserLoggedIn) {
@@ -33,19 +33,15 @@ const Game = ({ cart, cartAddItem, game, isUserLoggedIn, isUserAdmin }) => {
 
   const editGame = () => {
     if (isUserLoggedIn && isUserAdmin) {
-      return <Button onClick={() => setEditEnable(true)}>Edit</Button>;
+      return <Button onClick={() => setEditEnabling(true)}>Edit</Button>;
     }
   };
 
   return (
     game && (
       <>
-        {isEditEnable ? (
-          <GameEdit
-            game={game}
-            onEdit={() => setEditEnable(false)}
-            onCancel={() => setEditEnable(false)}
-          />
+        {isEditEnabled ? (
+          <GameEdit game={game} cancelEdit={() => setEditEnabling(false)} />
         ) : (
           <>
             <GameDescription game={game} />
