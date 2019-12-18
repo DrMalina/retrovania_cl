@@ -5,7 +5,7 @@ import * as S from './Navigation.styles';
 
 import logo from 'assets/images/logo.png';
 
-const Navigation = ({ currentUser, signOutReq, location }) => {
+const Navigation = ({ currentUser, itemsInCart, signOutReq, location }) => {
   return (
     <S.Nav location={location}>
       <S.NavList>
@@ -23,7 +23,7 @@ const Navigation = ({ currentUser, signOutReq, location }) => {
           {currentUser ? (
             <>
               <S.NavItem>
-                <S.NavLink to='/cart'>Cart</S.NavLink>
+                <S.NavLink to='/cart'>Cart ({itemsInCart})</S.NavLink>
               </S.NavItem>
               <S.NavItem>
                 <S.NavLink to='#' onClick={() => signOutReq()}>
