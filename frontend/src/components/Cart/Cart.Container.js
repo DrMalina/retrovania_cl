@@ -11,7 +11,7 @@ const CartContainer = ({ cart, cartRemoveItem, isLoading }) => {
   return isLoading ? (
     <SpinnerLocal />
   ) : (
-    <Cart cart={cart} cartRemoveItem={cartRemoveItem} />
+    <Cart cart={cart} removeItem={cartRemoveItem} />
   );
 };
 

@@ -6,7 +6,7 @@ import { Link } from 'components/Link';
 
 import * as S from './Cart.styles';
 
-const Cart = ({ cart, cartRemoveItem }) =>
+const Cart = ({ cart, removeItem }) =>
   cart && cart.length ? (
     <S.CartTable>
       <S.CartTableHead>
@@ -18,22 +18,20 @@ const Cart = ({ cart, cartRemoveItem }) =>
         </tr>
       </S.CartTableHead>
       <tbody>
-        {cart.map(product => (
-          <tr key={product._id}>
+        {cart.map(game => (
+          <tr key={game._id}>
             <td>
-              <Link to={`/games/${product._id}`}>{product.name}</Link>
+              <Link to={`/games/${game._id}`}>{game.name}</Link>
             </td>
-            <td>{product.from}</td>
-            <td>{product.to}</td>
+            <td>{new Date(game.from).toLocaleDateString()}</td>
+            <td>{new Date(game.to).toLocaleDateString()}</td>
             <td>
-              <Button onClick={() => cartRemoveItem(product._id)}>
-                Delete
-              </Button>
+              <Button onClick={() => removeItem(game._id)}>Delete</Button>
               <DateEditor
                 activator={({ setIsOpened }) => (
                   <Button onClick={() => setIsOpened(true)}>Edit</Button>
                 )}
-                data={product}
+                data={game}
               />
             </td>
           </tr>

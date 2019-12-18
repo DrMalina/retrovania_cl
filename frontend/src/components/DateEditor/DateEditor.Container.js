@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react';
 import { DateUtils } from 'react-day-picker';
+import { connect } from 'react-redux';
 
 import { DateEditor } from './DateEditor';
 import dateReducer, {
@@ -9,6 +10,7 @@ import dateReducer, {
   SELECT_FROM,
   SELECT_TO
 } from './DateEditor.reducer';
+import { cartAddItem } from 'redux/cart/actions';
 
 const DateEditorContainer = props => {
   const [state, dispatch] = useReducer(dateReducer, initState());
@@ -71,4 +73,13 @@ const DateEditorContainer = props => {
   );
 };
 
-export { DateEditorContainer };
+const mapDispatchToProps = {
+  cartAddItem
+};
+
+const EnhancedDateEditorContainer = connect(
+  null,
+  mapDispatchToProps
+)(DateEditorContainer);
+
+export { EnhancedDateEditorContainer as DateEditorContainer };

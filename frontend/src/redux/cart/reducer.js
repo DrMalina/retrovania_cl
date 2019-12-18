@@ -29,11 +29,26 @@ export default function cartReducer(state = INITIAL_STATE, action) {
         error: null,
         loading: false
       };
-    case types.CART_ADD_ITEM:
+    case types.CART_ADD_ITEM: {
+      if (state.current.find(item => action.payload.item._id === item._id)) {
+        return {
+          ...state,
+          current: state.current.map(item => {
+            if (action.payload.item._id === item._id) {
+              return {
+                ...item,
+                ...action.payload.item
+              };
+            }
+            return item;
+          })
+        };
+      }
       return {
         ...state,
-        current: state.current.concat([action.payload.item])
+        current: [...state.current, action.payload.item]
       };
+    }
     case types.CART_REMOVE_ITEM:
       return {
         ...state,

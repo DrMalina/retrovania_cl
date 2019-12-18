@@ -6,7 +6,21 @@ import { Modal } from 'components/Modal';
 import * as S from './DateEditor.styles';
 
 const DateEditor = props => {
-  const { activator, from, to, onResetClick } = props;
+  const { activator, cartAddItem, data, from, to, onResetClick } = props;
+
+  const generateConfirm = () => {
+    if (from && to) {
+      return handleConfirm;
+    }
+    return null;
+  };
+
+  const handleConfirm = () =>
+    cartAddItem({
+      ...data,
+      from: from.toString(),
+      to: to.toString()
+    });
 
   const renderText = () => {
     return (
@@ -26,7 +40,11 @@ const DateEditor = props => {
   };
 
   return (
-    <Modal activator={activator} title='Select dates'>
+    <Modal
+      activator={activator}
+      onConfirm={generateConfirm()}
+      title='Select dates'
+    >
       {renderText()}
       <DayPicker {...props} />
     </Modal>

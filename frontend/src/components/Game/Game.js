@@ -11,6 +11,7 @@ const Game = ({ cart, cartAddItem, game, isUserAdmin, isUserLoggedIn }) => {
   const [isEditEnabled, setEditEnabling] = useState(false);
 
   return (
+    cart &&
     game && (
       <>
         {isEditEnabled ? (
