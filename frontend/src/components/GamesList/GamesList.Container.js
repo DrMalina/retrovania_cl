@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { gamesFetch } from 'redux/games/utils';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
+import qs from 'query-string';
 
 import { GamesList } from './GamesList';
 
@@ -10,20 +10,36 @@ import { errorHandlerLocal } from 'components/errorHandlerLocal';
 import { GamesFilter } from 'components/GamesFilter';
 import { SpinnerLocal } from 'components/SpinnerLocal';
 
-const GamesListContainer = ({ games, gamesFetch, total, isLoading }) => {
+import { gamesFetch } from 'redux/games/utils';
+
+const GamesListContainer = ({ games, gamesFetch, isLoading }) => {
   const location = useLocation();
+  const history = useHistory();
+  const parsedSearchQuery = qs.parse(location.search).query || '';
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    gamesFetch(params.get('page'));
+    gamesFetch({ page: params.get('page'), query: params.get('query') });
   }, [location]);
+
+  const handleSearch = search => {
+    const searchQuery = qs.stringify({
+      //replace multiple whitespaces into 1 and trim
+      query: search.replace(/\s\s+/g, ' ').trim()
+    });
+    history.push(`/games?${searchQuery}`);
+  };
 
   return isLoading ? (
     <SpinnerLocal />
   ) : (
     <>
-      <GamesFilter />
-      <GamesList games={games} gamesFetch={gamesFetch} total={total} />
+      <GamesFilter onSearch={handleSearch} initQuery={parsedSearchQuery} />
+      <GamesList
+        games={games}
+        gamesFetch={gamesFetch}
+        query={parsedSearchQuery}
+      />
     </>
   );
 };
@@ -31,7 +47,6 @@ const GamesListContainer = ({ games, gamesFetch, total, isLoading }) => {
 const mapStateToProps = state => ({
   error: state.games.error,
   games: state.games.gamesInStore,
-  total: state.games.total,
   isLoading: state.games.loading
 });
 
