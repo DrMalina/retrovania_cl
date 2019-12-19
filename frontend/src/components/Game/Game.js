@@ -3,11 +3,15 @@ import React, { useState } from 'react';
 import { Button } from 'components/Button';
 import { Link } from 'components/Link';
 
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { cartAddItem } from 'redux/cart/actions';
+
 import { GameDescription } from './GameDescription';
 import { GameEdit } from './GameEdit';
 import * as S from './Game.styles';
 
-const Game = ({ cart, cartAddItem, game, isUserLoggedIn, isUserAdmin }) => {
+const Game = ({ cart, cartAddItem, game, isUserAdmin, isUserLoggedIn }) => {
   const [isEditEnabled, setEditEnabling] = useState(false);
 
   const renderActions = () => {
@@ -55,5 +59,20 @@ const Game = ({ cart, cartAddItem, game, isUserLoggedIn, isUserAdmin }) => {
     )
   );
 };
+const mapStateToProps = state => ({
+  isUserAdmin: !!state.user.current && state.user.current.role === 'admin',
+  isUserLoggedIn: !!state.user.current
+});
 
-export { Game };
+const mapDispatchToProps = {
+  cartAddItem
+};
+
+const EnhancedGame = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(Game);
+
+export { EnhancedGame as Game };

@@ -6,20 +6,10 @@ import { errorHandlerLocal } from 'components/errorHandlerLocal';
 import { withSpinnerLocal } from 'components/withSpinnerLocal';
 import { Game } from './Game';
 
-import { cartAddItem } from 'redux/cart/actions';
 import { gameCleanup } from 'redux/game/actions';
 import { gameFetch } from 'redux/game/utils';
 
-const GameContainer = ({
-  cart,
-  cartAddItem,
-  id,
-  isUserLoggedIn,
-  isUserAdmin,
-  game,
-  gameFetch,
-  gameCleanup
-}) => {
+const GameContainer = ({ cart, id, game, gameFetch, gameCleanup }) => {
   useEffect(() => {
     if (!game || game._id !== id) {
       gameFetch(id);
@@ -32,28 +22,17 @@ const GameContainer = ({
     };
   }, []);
 
-  return (
-    <Game
-      cart={cart}
-      game={game}
-      isUserLoggedIn={isUserLoggedIn}
-      cartAddItem={cartAddItem}
-      isUserAdmin={isUserAdmin}
-    />
-  );
+  return <Game cart={cart} game={game} />;
 };
 
 const mapStateToProps = state => ({
   cart: state.cart.current,
   error: state.game.error,
   game: state.game.current,
-  isLoading: state.game.loading,
-  isUserLoggedIn: !!state.user.current,
-  isUserAdmin: !!state.user.current && state.user.current.role === 'admin'
+  isLoading: state.game.loading
 });
 
 const mapDispatchToProps = {
-  cartAddItem,
   gameFetch,
   gameCleanup
 };
