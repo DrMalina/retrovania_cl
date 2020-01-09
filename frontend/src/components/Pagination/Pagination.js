@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import qs from 'query-string';
 
 import * as S from './Pagination.styles';
 import { Link } from 'components/Link';
 
-export const Pagination = props => {
+const Pagination = ({ totalGames }) => {
   const [activePage, setActivePage] = useState(1);
   const location = useLocation();
+
+  const pageCount = Math.ceil(totalGames / 10);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -23,34 +26,41 @@ export const Pagination = props => {
     }
   };
 
-  const createPages = () => {
-    return Array.from(Array(props.pageCount).keys()).map((el, index) => (
-      <S.LI key={index} active={activePage == index + 1}>
-        <Link to={`/games?page=${index + 1}`}>{index + 1}</Link>
-      </S.LI>
-    ));
+  const getPageLink = page => {
+    const parsed = { ...qs.parse(location.search), page };
+    return `/games?${qs.stringify(parsed)}`;
   };
 
   return (
     <S.Ul>
-      <S.LI disabled={activePage === 1}>
-        <Link
-          disabled={activePage === 1}
-          onClick={e => handleArrowLinkClick(e, 1)}
-          to={`/games?page=${activePage - 1}`}
-        >
-          Previous
-        </Link>
+      <S.LI
+        as={Link}
+        disabled={activePage === 1}
+        onClick={e => handleArrowLinkClick(e, 1)}
+        to={getPageLink(activePage - 1)}
+      >
+        Previous
       </S.LI>
-      {createPages()}
-      <S.LI disabled={activePage === props.pageCount}>
-        <Link
-          onClick={e => handleArrowLinkClick(e, props.pageCount)}
-          to={`/games?page=${activePage + 1}`}
+      {[...Array(pageCount).keys()].map((el, index) => (
+        <S.LI
+          as={Link}
+          key={index}
+          active={activePage === index + 1 ? 'active' : null}
+          to={getPageLink(index + 1)}
         >
-          Next
-        </Link>
+          {index + 1}
+        </S.LI>
+      ))}
+      <S.LI
+        as={Link}
+        disabled={activePage === pageCount}
+        onClick={e => handleArrowLinkClick(e, pageCount)}
+        to={getPageLink(activePage + 1)}
+      >
+        Next
       </S.LI>
     </S.Ul>
   );
 };
+
+export { Pagination };
