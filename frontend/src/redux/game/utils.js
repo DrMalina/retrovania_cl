@@ -10,3 +10,13 @@ export const gameFetch = id => async dispatch => {
     dispatch(actions.gameFetchFailure(error));
   }
 };
+
+export const updateGame = game => async dispatch => {
+  try {
+    dispatch(actions.gameUpdateStart());
+    const updatedGame = await GamesService.updateGame(game);
+    dispatch(actions.gameUpdateSuccess(updatedGame));
+  } catch (error) {
+    dispatch(actions.gameUpdateFailure(error));
+  }
+};

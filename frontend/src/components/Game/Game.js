@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Button } from 'components/Button';
 import { Link } from 'components/Link';
 
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { cartAddItem } from 'redux/cart/actions';
+
+import { GameDescription } from './GameDescription';
+import { GameEdit } from './GameEdit';
 import * as S from './Game.styles';
 
-const Game = ({ cart, cartAddItem, game, isUserLoggedIn }) => {
+const Game = ({ cart, cartAddItem, game, isUserAdmin, isUserLoggedIn }) => {
+  const [isEditEnabled, setEditEnabling] = useState(false);
+
   const renderActions = () => {
     if (isUserLoggedIn) {
       if (cart.find(({ _id }) => _id === game._id)) {
@@ -27,25 +35,44 @@ const Game = ({ cart, cartAddItem, game, isUserLoggedIn }) => {
     );
   };
 
+  const editGame = () => {
+    if (isUserLoggedIn && isUserAdmin) {
+      return <Button onClick={() => setEditEnabling(true)}>Edit</Button>;
+    }
+  };
+
   return (
     game && (
-      <S.GameWrapper>
-        <S.GameTitle>{game.name}</S.GameTitle>
-        <S.GameSummary>{game.summary}</S.GameSummary>
-        <S.GameReleaseDate>
-          {'Release date: '}
-          <S.GameHighlight>
-            {new Date(game.firstReleaseDate * 1000).toLocaleDateString()}
-          </S.GameHighlight>
-        </S.GameReleaseDate>
-        <S.GameGenres>
-          {'Genres: '}
-          <S.GameHighlight>{game.genres.join(', ')}</S.GameHighlight>
-        </S.GameGenres>
-        <S.GameActions>{renderActions()}</S.GameActions>
-      </S.GameWrapper>
+      <>
+        {isEditEnabled ? (
+          <GameEdit game={game} cancelEdit={() => setEditEnabling(false)} />
+        ) : (
+          <>
+            <GameDescription game={game} />
+            <S.GameActions>
+              {renderActions()}
+              {editGame()}
+            </S.GameActions>
+          </>
+        )}
+      </>
     )
   );
 };
+const mapStateToProps = state => ({
+  isUserAdmin: !!state.user.current && state.user.current.role === 'admin',
+  isUserLoggedIn: !!state.user.current
+});
 
-export { Game };
+const mapDispatchToProps = {
+  cartAddItem
+};
+
+const EnhancedGame = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(Game);
+
+export { EnhancedGame as Game };
