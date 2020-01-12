@@ -1,3 +1,4 @@
 const fetchCurrent = require('./fetchCurrent');
+const persist = require('./persist');
 
-module.exports = { fetchCurrent };
+module.exports = { fetchCurrent, persist };

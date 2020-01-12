@@ -3,7 +3,7 @@ const { isInt } = require('validator');
 const Game = require('models/Game');
 
 function convertQueryToRegex(query) {
-  //only accept LETTERS, NUMBERS, SPACES
+  // only accept LETTERS, NUMBERS, SPACES
   if (!query.match(/^[A-Za-z0-9 ]*$/g)) return null;
   return new RegExp(`${query.split(' ').join('|')}`, 'gi');
 }

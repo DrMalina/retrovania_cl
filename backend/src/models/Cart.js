@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const schema = new Schema(
   {
-    products: [{ type: Schema.Types.ObjectId, ref: 'game', unique: true }],
+    products: [{ type: Schema.Types.ObjectId, ref: 'game' }],
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'user',
