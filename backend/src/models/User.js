@@ -83,6 +83,12 @@ schema.methods.validatePassword = async function validatePassword(password) {
   return isMatch;
 };
 
+schema.virtual('cart', {
+  ref: 'Cart',
+  foreignField: 'userId',
+  localField: '_id',
+});
+
 const User = mongoose.model('user', schema);
 
 module.exports = User;
