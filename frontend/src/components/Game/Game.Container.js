@@ -20,7 +20,9 @@ const GameContainer = ({ cart, id, game, gameFetch, gameCleanup }) => {
         gameCleanup();
       }
     };
-  }, []);
+  }, [
+    game, gameCleanup, gameFetch, id,
+  ]);
 
   return <Game cart={cart} game={game} />;
 };

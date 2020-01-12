@@ -20,7 +20,7 @@ const GamesListContainer = ({ games, gamesFetch, isLoading }) => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     gamesFetch({ page: params.get('page'), query: params.get('query') });
-  }, [location]);
+  }, [gamesFetch, location]);
 
   const handleSearch = search => {
     const searchQuery = qs.stringify({

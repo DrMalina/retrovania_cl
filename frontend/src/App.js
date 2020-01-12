@@ -27,7 +27,7 @@ const App = ({ currentUser, reauthorize }) => {
         reauthorize(token);
       }
     }
-  }, []);
+  }, [currentUser, reauthorize]);
 
   return (
     <Router>

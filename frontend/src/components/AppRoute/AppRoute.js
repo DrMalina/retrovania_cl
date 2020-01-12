@@ -15,7 +15,7 @@ const AppRoute = ({ component: Component, requiresAuth = false, ...rest }) => {
         history.push('/');
       }
     }
-  }, [currentUser]);
+  }, [currentUser, history, state]);
 
   if (requiresAuth && !currentUser) {
     return <Redirect to='/signin' />;
