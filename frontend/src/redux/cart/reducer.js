@@ -41,6 +41,9 @@ export default function cartReducer(state = INITIAL_STATE, action) {
           ({ _id }) => _id !== action.payload.itemId
         )
       };
+    case types.CART_PERSIST:
+    case types.CART_PERSIST_FAILURE:
+    case types.CART_PERSIST_SUCCESS:
     default:
       return state;
   }

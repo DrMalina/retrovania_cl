@@ -1,5 +1,6 @@
 import * as actions from 'redux/users/actions';
 import { cartCleanup } from 'redux/cart/actions';
+import { cartFetch, cartPersist } from 'redux/cart/utils';
 import axios from 'axios';
 import User from 'services/Users';
 
@@ -10,11 +11,12 @@ export const reauthorize = token => async dispatch => {
     dispatch(actions.signInSuccess(response.data.user));
     localStorage.setItem('token', JSON.stringify(response.data.token));
     axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
+    dispatch(cartFetch());
   } catch (error) {
-    dispatch(actions.signInFailure(error));
-    dispatch(cartCleanup());
     if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
+    dispatch(actions.signInFailure(error));
+    dispatch(cartCleanup());
   }
 };
 
@@ -25,25 +27,27 @@ export const signInReq = (route, formValues) => async dispatch => {
     dispatch(actions.signInSuccess(response.data.user));
     localStorage.setItem('token', JSON.stringify(response.data.token));
     axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
+    dispatch(cartFetch());
   } catch (error) {
-    dispatch(actions.signInFailure(error));
     if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
+    dispatch(actions.signInFailure(error));
   }
 };
 
 export const signOutReq = () => async dispatch => {
   try {
+    await dispatch(cartPersist());
     dispatch(actions.signOutInit());
     const response = await User.deauthenticate();
+    if (localStorage.token) localStorage.removeItem('token');
+    delete axios.defaults.headers.common.Authorization;
     dispatch(actions.signOutSuccess(response.data.user));
     dispatch(cartCleanup());
+  } catch (error) {
     if (localStorage.token) localStorage.removeItem('token');
     delete axios.defaults.headers.common.Authorization;
-  } catch (error) {
     dispatch(actions.signOutFailure(error));
     dispatch(cartCleanup());
-    if (localStorage.token) localStorage.removeItem('token');
-    delete axios.defaults.headers.common.Authorization;
   }
 };
