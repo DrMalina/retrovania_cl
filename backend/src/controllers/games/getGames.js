@@ -11,16 +11,14 @@ function convertQueryToRegex(query) {
 async function getGames(req, res, next) {
   try {
     const { limit = '15', page = '1', query = '' } = req.query;
-    const totalNumGames = await Game.countDocuments();
+    const convertedQuery = convertQueryToRegex(query);
+    const totalNumGames = await Game.find({ name: convertedQuery }).countDocuments();
 
     if (
       isInt(limit, { min: 1 }) &&
       isInt(page, { min: 1, max: Math.ceil(totalNumGames / limit) })
     ) {
-      const games = await Game.paginate(
-        { name: convertQueryToRegex(query) },
-        { limit: +limit, page: +page },
-      );
+      const games = await Game.paginate({ name: convertedQuery }, { limit: +limit, page: +page });
       return res.status(200).json(games);
     }
 
