@@ -18,6 +18,13 @@ const GameWrapper = styled.div`
   width: 80%;
 `;
 
+const GameActionButtons = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 20px;
+  grid-template-columns: minmax(min-content, 1fr);
+`;
+
 const GameActions = styled.div`
   grid-area: actions;
   justify-self: center;
@@ -53,6 +60,7 @@ const GameTitle = styled.p`
 `;
 
 export {
+  GameActionButtons,
   GameActions,
   GameGenres,
   GameHighlight,

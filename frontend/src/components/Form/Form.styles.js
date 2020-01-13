@@ -6,6 +6,11 @@ const Form = styled(FormikForm)`
   display: flex;
   flex-flow: column nowrap;
   margin-bottom: 25px;
+  width: 100%;
+
+  & > div:last-of-type {
+    margin-bottom: 60px;
+  }
 `;
 
 export { Form };

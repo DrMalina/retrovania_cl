@@ -10,10 +10,8 @@ const { sizes, weights } = typography;
 
 const InputWrapper = styled.div`
   margin: 15px 0;
-
-  &:last-of-type {
-    margin-bottom: 60px;
-  }
+  width: 100%;
+  max-width: 625px;
 `;
 
 const Input = styled.input`
@@ -37,12 +35,18 @@ const Input = styled.input`
   height: 60px;
   padding-left: 20px;
   padding-right: ${({ meta }) => (meta.touched ? '60px' : '20px')};
-  width: 625px;
+  width: 100%;
 
   &:focus {
     box-shadow: 0 0 10px ${input.focus.hex}, 0 0 10px ${input.focus.hex} inset;
     outline: none;
   }
+`;
+
+const Textarea = styled(Input)`
+  height: auto;
+  padding: 10px 20px;
+  resize: none;
 `;
 
 const Label = styled.label`
@@ -58,4 +62,4 @@ const ErrorMessage = styled.div`
   margin: 15px 0 0 20px;
 `;
 
-export { ErrorMessage, Input, InputWrapper, Label };
+export { ErrorMessage, Input, InputWrapper, Label, Textarea };

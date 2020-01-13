@@ -24,7 +24,9 @@ const Modal = styled(GamesListItemWrapper)`
   background: ${button.background.hex};
   color: ${text.primary.hex};
   left: 50%;
-  max-width: 1200px;
+  max-width: 1400px;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
   padding: 40px;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -32,6 +34,7 @@ const Modal = styled(GamesListItemWrapper)`
 
   & > *:not(:last-child) {
     margin-bottom: 30px;
+    width: 100%;
   }
 `;
 

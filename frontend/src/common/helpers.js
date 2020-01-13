@@ -8,13 +8,16 @@ export const capitalizeFirstLetter = string => {
     .replace(/^./, str => str.toUpperCase()); // capitalize first letter
 };
 
-export const renderFormFields = values => {
-  return values.map((el, index) => (
+export const renderFormFields = (formProps, element = 'input') => {
+  return formProps.map((prop, index) => (
     <Input
+      element={element}
       key={index}
-      label={capitalizeFirstLetter(el)}
-      name={el}
-      type={el === 'confirmPassword' || el === 'password' ? 'password' : 'text'}
+      label={capitalizeFirstLetter(prop)}
+      name={prop}
+      type={
+        prop === 'confirmPassword' || prop === 'password' ? 'password' : 'text'
+      }
     />
   ));
 };

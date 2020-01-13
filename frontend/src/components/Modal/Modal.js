@@ -7,6 +7,7 @@ const Modal = ({
   activator,
   closeText = 'cancel',
   children,
+  confirmAttrs = {},
   confirmText = 'confirm',
   onConfirm,
   title
@@ -28,7 +29,9 @@ const Modal = ({
         <S.ModalActionsWrapper>
           <S.ModalButton onClick={handleClose}>{closeText}</S.ModalButton>
           {onConfirm && (
-            <S.ModalButton onClick={handleConfirm}>{confirmText}</S.ModalButton>
+            <S.ModalButton onClick={handleConfirm} {...confirmAttrs}>
+              {confirmText}
+            </S.ModalButton>
           )}
         </S.ModalActionsWrapper>
       </S.Modal>
