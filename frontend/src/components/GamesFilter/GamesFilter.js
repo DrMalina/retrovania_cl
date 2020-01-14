@@ -4,6 +4,17 @@ import { SearchBar } from 'components/SearchBar';
 
 const GamesFilter = ({ onSearch, initQuery }) => {
   const [internalQuery, setInternalQuery] = useState(initQuery);
+  const [isDisabled, setDisable] = useState(true);
+
+  const handleChange = e => {
+    const value = e.target.value;
+    setInternalQuery(value);
+    if (value.length > 0) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -18,7 +29,8 @@ const GamesFilter = ({ onSearch, initQuery }) => {
         id='search-input'
         placeholder='Search for a game...'
         value={internalQuery}
-        onChange={e => setInternalQuery(e.target.value)}
+        onChange={handleChange}
+        disabled={isDisabled}
       />
     </form>
   );
