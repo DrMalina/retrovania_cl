@@ -7,8 +7,12 @@ async function persist(req, res, next) {
     const userId = mongoose.Types.ObjectId(_id);
 
     if (req.body && req.body.cart) {
-      const products = req.body.cart.map(({ _id: id }) => {
-        return mongoose.Types.ObjectId(id);
+      const products = req.body.cart.map(({ _id: id, from, to }) => {
+        return {
+          productId: mongoose.Types.ObjectId(id),
+          from,
+          to,
+        };
       });
 
       const cart = await Cart.findOneAndUpdate({ userId }, { products }, { new: true });
@@ -16,7 +20,7 @@ async function persist(req, res, next) {
       if (!cart) {
         await Cart.create({
           userId,
-          products: req.body.cart,
+          products,
         });
       }
     }
