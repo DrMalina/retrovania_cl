@@ -8,7 +8,7 @@ mongoose
     user: config.MONGO_INITDB_ROOT_USERNAME,
     pass: config.MONGO_INITDB_ROOT_PASSWORD,
     useCreateIndex: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

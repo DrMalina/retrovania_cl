@@ -27,8 +27,6 @@ const AppRoute = ({
     return <Redirect to='/signin' />;
   }
 
-  console.log(state);
-
   return (
     <Route
       {...rest}

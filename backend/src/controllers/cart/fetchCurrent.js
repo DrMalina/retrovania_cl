@@ -6,7 +6,7 @@ async function fetchCurrent(req, res, next) {
 
     const cart = await Cart.findOne({ userId }).populate('products');
 
-    const { products } = cart || [];
+    const products = cart ? cart.products : [];
 
     res.status(200).send({ cart: products });
   } catch (err) {

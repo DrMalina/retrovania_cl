@@ -3,11 +3,12 @@ const Cart = require('models/Cart');
 
 async function persist(req, res, next) {
   try {
-    const { _id: userId } = req.user;
+    const { _id } = req.user;
+    const userId = mongoose.Types.ObjectId(_id);
 
-    if (req.body.cart.length) {
-      const products = req.body.cart.map(({ _id }) => {
-        return mongoose.Types.ObjectId(_id);
+    if (req.body && req.body.cart) {
+      const products = req.body.cart.map(({ _id: id }) => {
+        return mongoose.Types.ObjectId(id);
       });
 
       const cart = await Cart.findOneAndUpdate({ userId }, { products }, { new: true });
