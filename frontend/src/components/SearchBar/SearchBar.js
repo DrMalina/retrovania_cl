@@ -6,9 +6,9 @@ const SearchBar = ({ disabled, ...props }) => {
   return (
     <>
       <S.Input {...props} meta={false} />
-      <button type='submit' disabled={disabled}>
+      <S.Button type='submit' disabled={disabled}>
         Search
-      </button>
+      </S.Button>
     </>
   );
 };

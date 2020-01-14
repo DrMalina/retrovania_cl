@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { Button } from 'components/Button/Button.styles';
 import { Input } from 'components/Input/Input.styles';
 
 const SearchInput = styled(Input)`
@@ -10,4 +11,10 @@ const SearchInput = styled(Input)`
   margin-bottom: 30px;
 `;
 
-export { SearchInput as Input };
+const SearchButton = styled(Button)`
+  font-size: 2rem;
+  padding: 15px 54px 17px 57px;
+  margin-left: 10px;
+`;
+
+export { SearchButton as Button, SearchInput as Input };
