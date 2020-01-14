@@ -1,4 +1,13 @@
-import { GAMES_FETCH, GAMES_FETCH_FAILURE, GAMES_FETCH_SUCCESS } from './types';
+import {
+  GAMES_CLEANUP,
+  GAMES_FETCH,
+  GAMES_FETCH_FAILURE,
+  GAMES_FETCH_SUCCESS
+} from './types';
+
+export const gamesCleanup = () => ({
+  type: GAMES_CLEANUP
+});
 
 export const gamesFetchStart = () => ({
   type: GAMES_FETCH
