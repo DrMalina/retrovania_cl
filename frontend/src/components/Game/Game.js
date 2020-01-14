@@ -13,14 +13,24 @@ import { cartAddItem } from 'redux/cart/actions';
 
 import * as S from './Game.styles';
 
-const Game = ({ cart, game, isUserLoggedIn, isUserAdmin }) => {
-  const isInCart = () => {
-    return !!cart.find(({ _id }) => _id === game._id);
-  };
-
+const Game = ({ game, gameInCart, isUserLoggedIn, isUserAdmin }) => {
   const renderText = () => {
-    if (isUserLoggedIn && isInCart()) {
-      return <p>This game is already in your cart.</p>;
+    if (isUserLoggedIn && gameInCart) {
+      return (
+        <>
+          <p>This game is already in your cart.</p>
+          <p>
+            Rental from{' '}
+            <S.GameHighlight>
+              {unixTimestampToDate(gameInCart.from).toLocaleDateString()}
+            </S.GameHighlight>{' '}
+            to{' '}
+            <S.GameHighlight>
+              {unixTimestampToDate(gameInCart.to).toLocaleDateString()}
+            </S.GameHighlight>
+          </p>
+        </>
+      );
     }
     if (!isUserLoggedIn) {
       return (
@@ -39,7 +49,7 @@ const Game = ({ cart, game, isUserLoggedIn, isUserAdmin }) => {
   };
 
   const renderActions = () => {
-    const cartButtonText = isInCart() ? 'Edit cart' : 'Add to cart';
+    const cartButtonText = gameInCart ? 'Edit cart' : 'Add to cart';
 
     return (
       <S.GameActionButtons>
@@ -50,7 +60,9 @@ const Game = ({ cart, game, isUserLoggedIn, isUserAdmin }) => {
                 {cartButtonText}
               </Button>
             )}
-            data={game}
+            rentalFrom={gameInCart && unixTimestampToDate(gameInCart.from)}
+            rentalTo={gameInCart && unixTimestampToDate(gameInCart.to)}
+            game={game}
           />
         )}
         {isUserLoggedIn && isUserAdmin && (
@@ -66,7 +78,6 @@ const Game = ({ cart, game, isUserLoggedIn, isUserAdmin }) => {
   };
 
   return (
-    cart &&
     game && (
       <S.GameWrapper>
         <S.GameTitle>{game.name}</S.GameTitle>

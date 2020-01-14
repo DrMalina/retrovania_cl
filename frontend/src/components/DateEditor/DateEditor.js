@@ -8,7 +8,7 @@ import { dateToUnixTimestamp } from 'common/helpers';
 import * as S from './DateEditor.styles';
 
 const DateEditor = props => {
-  const { activator, cartAddItem, data, from, to, onResetClick } = props;
+  const { activator, cartAddItem, game, from, to, onResetClick, onClose } = props;
 
   const generateConfirm = () => {
     if (from && to) {
@@ -19,7 +19,7 @@ const DateEditor = props => {
 
   const handleConfirm = () =>
     cartAddItem({
-      ...data,
+      ...game,
       from: dateToUnixTimestamp(from),
       to: dateToUnixTimestamp(to)
     });
@@ -45,6 +45,7 @@ const DateEditor = props => {
     <Modal
       activator={activator}
       onConfirm={generateConfirm()}
+      onClose={onClose}
       title='Select dates'
     >
       {renderText()}

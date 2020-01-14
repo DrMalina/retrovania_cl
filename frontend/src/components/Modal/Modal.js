@@ -10,15 +10,14 @@ const Modal = ({
   confirmAttrs = {},
   confirmText = 'confirm',
   onConfirm,
+  onClose = () => {},
   title
 }) => {
   const [isOpened, setIsOpened] = useState(false);
 
-  const handleClose = () => setIsOpened(false);
-
-  const handleConfirm = () => {
-    onConfirm();
-    handleClose();
+  const handleButtonClick = fn => {
+    fn();
+    setIsOpened(false);
   };
 
   const content = (
@@ -27,9 +26,14 @@ const Modal = ({
         <S.ModalHeading>{title}</S.ModalHeading>
         <div>{children}</div>
         <S.ModalActionsWrapper>
-          <S.ModalButton onClick={handleClose}>{closeText}</S.ModalButton>
+          <S.ModalButton onClick={() => handleButtonClick(onClose)}>
+            {closeText}
+          </S.ModalButton>
           {onConfirm && (
-            <S.ModalButton onClick={handleConfirm} {...confirmAttrs}>
+            <S.ModalButton
+              onClick={() => handleButtonClick(onConfirm)}
+              {...confirmAttrs}
+            >
               {confirmText}
             </S.ModalButton>
           )}

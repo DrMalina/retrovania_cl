@@ -42,7 +42,9 @@ const Cart = ({ cart, removeItem }) =>
                       <S.PencilIcon />
                     </S.CartActionButton>
                   )}
-                  data={game}
+                  rentalFrom={unixTimestampToDate(game.from)}
+                  rentalTo={unixTimestampToDate(game.to)}
+                  game={game}
                 />
               </td>
             </tr>

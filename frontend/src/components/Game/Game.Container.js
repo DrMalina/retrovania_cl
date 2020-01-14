@@ -9,7 +9,7 @@ import { Game } from './Game';
 import { gameCleanup } from 'redux/game/actions';
 import { gameFetch } from 'redux/game/utils';
 
-const GameContainer = ({ cart, id, game, gameFetch, gameCleanup }) => {
+const GameContainer = ({ id, game, gameFetch, gameCleanup, gameInCart }) => {
   useEffect(() => {
     if (!game || game._id !== id) {
       gameFetch(id);
@@ -22,13 +22,15 @@ const GameContainer = ({ cart, id, game, gameFetch, gameCleanup }) => {
     };
   }, [game, gameCleanup, gameFetch, id]);
 
-  return <Game cart={cart} game={game} />;
+  return <Game game={game} gameInCart={gameInCart} />;
 };
 
 const mapStateToProps = state => ({
-  cart: state.cart.current,
   error: state.game.error,
   game: state.game.current,
+  gameInCart:
+    state.game.current &&
+    state.cart.current.find(({ _id }) => _id === state.game.current._id),
   isLoading: state.game.loading
 });
 

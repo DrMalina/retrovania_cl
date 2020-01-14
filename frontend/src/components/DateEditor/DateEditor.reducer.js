@@ -3,10 +3,10 @@ export const RESET = 'RESET';
 export const SELECT_FROM = 'SELECT_FROM';
 export const SELECT_TO = 'SELECT_TO';
 
-export const initState = () => ({
-  from: null,
-  to: null,
-  enteredTo: null
+export const initState = (from = null, to = null, enteredTo = to) => ({
+  from,
+  to,
+  enteredTo
 });
 
 export default (state, action) => {
@@ -30,7 +30,7 @@ export default (state, action) => {
         enteredTo: action.payload.day
       };
     case RESET:
-      return initState();
+      return initState(action.payload.from, action.payload.to);
     default:
       return state;
   }

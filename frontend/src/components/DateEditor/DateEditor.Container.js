@@ -10,11 +10,18 @@ import dateReducer, {
   SELECT_FROM,
   SELECT_TO
 } from './DateEditor.reducer';
+
 import { cartAddItem } from 'redux/cart/actions';
 
 const DateEditorContainer = props => {
-  const [state, dispatch] = useReducer(dateReducer, initState());
+  const { rentalFrom, rentalTo } = props;
+
+  const [state, dispatch] = useReducer(
+    dateReducer,
+    initState(rentalFrom, rentalTo)
+  );
   const { enteredTo, from, to } = state;
+
   const disabledDays = [
     { before: new Date() },
     { before: from, after: from && DateUtils.addMonths(from, 1) }
@@ -33,7 +40,7 @@ const DateEditorContainer = props => {
       return;
     }
     if (from && to && day >= from && day <= to) {
-      dispatch({ type: RESET });
+      handleResetClick();
       return;
     }
     if (isSelectingFirstDay(from, to, day)) {
@@ -55,7 +62,24 @@ const DateEditorContainer = props => {
     }
   };
 
-  const handleResetClick = () => dispatch({ type: RESET });
+  const handleResetClick = () =>
+    dispatch({
+      type: RESET,
+      payload: {
+        from: null,
+        to: null
+      }
+    });
+
+  const restoreInitialDates = () => {
+    dispatch({
+      type: RESET,
+      payload: {
+        from: rentalFrom,
+        to: rentalTo
+      }
+    });
+  };
 
   return (
     <DateEditor
@@ -66,6 +90,7 @@ const DateEditorContainer = props => {
       onDayClick={handleDayClick}
       onDayMouseEnter={handleDayMouseEnter}
       onResetClick={handleResetClick}
+      onClose={restoreInitialDates}
       selectedDays={selectedDays}
       to={to}
       {...props}
