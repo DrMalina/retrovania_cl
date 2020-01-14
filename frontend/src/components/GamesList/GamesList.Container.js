@@ -10,17 +10,19 @@ import { errorHandlerLocal } from 'components/errorHandlerLocal';
 import { GamesFilter } from 'components/GamesFilter';
 import { SpinnerLocal } from 'components/SpinnerLocal';
 
+import { gamesCleanup } from 'redux/games/actions';
 import { gamesFetch } from 'redux/games/utils';
 
-const GamesListContainer = ({ games, gamesFetch, isLoading }) => {
+const GamesListContainer = ({ games, gamesCleanup, gamesFetch, isLoading }) => {
   const location = useLocation();
   const history = useHistory();
   const parsedSearchQuery = qs.parse(location.search).query || '';
 
   useEffect(() => {
+    gamesCleanup();
     const params = new URLSearchParams(location.search);
     gamesFetch({ page: params.get('page'), query: params.get('query') });
-  }, [gamesFetch, location]);
+  }, [gamesCleanup, gamesFetch, location]);
 
   const handleSearch = search => {
     const searchQuery = qs.stringify({
@@ -45,12 +47,12 @@ const GamesListContainer = ({ games, gamesFetch, isLoading }) => {
 };
 
 const mapStateToProps = state => ({
-  error: state.games.error,
   games: state.games.gamesInStore,
   isLoading: state.games.loading
 });
 
 const mapDispatchToProps = {
+  gamesCleanup,
   gamesFetch
 };
 
