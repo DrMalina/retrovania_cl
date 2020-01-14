@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { AppRoute } from 'components/AppRoute';
@@ -39,8 +39,8 @@ const App = ({ currentUser, reauthorize }) => {
           <AppRoute path='/cart' component={Cart} requiresAuth={true} />
           <AppRoute exact path='/games' component={Games} />
           <AppRoute path='/games/:id' component={Game} />
-          <AppRoute path='/signin' component={SignIn} />
-          <AppRoute path='/signup' component={SignUp} />
+          <AppRoute path='/signin' component={SignIn} publicOnly={true} />
+          <AppRoute path='/signup' component={SignUp} publicOnly={true} />
         </Switch>
       </main>
       <Footer />
