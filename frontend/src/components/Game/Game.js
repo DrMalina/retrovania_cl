@@ -7,6 +7,8 @@ import { DateEditor } from 'components/DateEditor';
 import { GameEditor } from 'components/GameEditor';
 import { Link } from 'components/Link';
 
+import { unixTimestampToDate } from 'common/helpers';
+
 import { cartAddItem } from 'redux/cart/actions';
 
 import * as S from './Game.styles';
@@ -72,7 +74,9 @@ const Game = ({ cart, game, isUserLoggedIn, isUserAdmin }) => {
         <S.GameReleaseDate>
           {'Release date: '}
           <S.GameHighlight>
-            {new Date(game.firstReleaseDate * 1000).toLocaleDateString()}
+            {new Date(
+              unixTimestampToDate(game.firstReleaseDate)
+            ).toLocaleDateString()}
           </S.GameHighlight>
         </S.GameReleaseDate>
         <S.GameGenres>

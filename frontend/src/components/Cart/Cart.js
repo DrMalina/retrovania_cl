@@ -2,6 +2,8 @@ import React from 'react';
 
 import { DateEditor } from 'components/DateEditor';
 
+import { unixTimestampToDate } from 'common/helpers';
+
 import * as S from './Cart.styles';
 
 const Cart = ({ cart, removeItem }) =>
@@ -22,8 +24,12 @@ const Cart = ({ cart, removeItem }) =>
               <td>
                 <S.CartLink to={`/games/${game._id}`}>{game.name}</S.CartLink>
               </td>
-              <td>{new Date(game.from).toLocaleDateString()}</td>
-              <td>{new Date(game.to).toLocaleDateString()}</td>
+              <td>
+                {new Date(unixTimestampToDate(game.from)).toLocaleDateString()}
+              </td>
+              <td>
+                {new Date(unixTimestampToDate(game.to)).toLocaleDateString()}
+              </td>
               <td>
                 <S.CartActionButton onClick={() => removeItem(game._id)}>
                   <span>Delete</span>

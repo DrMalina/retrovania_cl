@@ -3,6 +3,8 @@ import React from 'react';
 import { DayPicker } from 'components/DayPicker';
 import { Modal } from 'components/Modal';
 
+import { dateToUnixTimestamp } from 'common/helpers';
+
 import * as S from './DateEditor.styles';
 
 const DateEditor = props => {
@@ -18,8 +20,8 @@ const DateEditor = props => {
   const handleConfirm = () =>
     cartAddItem({
       ...data,
-      from: from.toString(),
-      to: to.toString()
+      from: dateToUnixTimestamp(from),
+      to: dateToUnixTimestamp(to)
     });
 
   const renderText = () => {

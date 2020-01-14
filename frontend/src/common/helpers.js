@@ -31,3 +31,7 @@ export const truncateString = (
   if (string.length <= maxLength) return string;
   return string.slice(0, string.lastIndexOf(separator, maxLength)) + endWith;
 };
+
+export const unixTimestampToDate = timestamp => new Date(timestamp * 1000);
+
+export const dateToUnixTimestamp = date => date.getTime() / 1000;

@@ -5,7 +5,11 @@ import { Formik } from 'formik';
 import { DayPicker } from 'components/DayPicker';
 import { Modal } from 'components/Modal';
 
-import { renderFormFields } from 'common/helpers';
+import {
+  dateToUnixTimestamp,
+  unixTimestampToDate,
+  renderFormFields
+} from 'common/helpers';
 
 import * as S from './GameEditor.styles';
 
@@ -18,7 +22,7 @@ const GameEditor = ({ activator, game }) => {
     dispatch(
       updateGame({
         ...values,
-        firstReleaseDate: values.firstReleaseDate / 1000,
+        firstReleaseDate: dateToUnixTimestamp(values.firstReleaseDate),
         genres: values.genres.split(', ')
       })
     );
@@ -28,7 +32,7 @@ const GameEditor = ({ activator, game }) => {
     <Formik
       initialValues={{
         ...game,
-        firstReleaseDate: new Date(game.firstReleaseDate * 1000),
+        firstReleaseDate: unixTimestampToDate(game.firstReleaseDate),
         genres: game.genres.join(', ')
       }}
       onSubmit={onConfirm}

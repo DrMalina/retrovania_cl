@@ -8,8 +8,8 @@ const schema = new Schema(
       {
         _id: false,
         productId: { type: Schema.Types.ObjectId, ref: 'game' },
-        from: { type: Date, required: true },
-        to: { type: Date, required: true },
+        from: { type: Number, required: true },
+        to: { type: Number, required: true },
       },
     ],
     userId: {
