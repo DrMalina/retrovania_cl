@@ -14,3 +14,12 @@ export const gamesFetch = ({
     dispatch(actions.gamesFetchFailure(error));
   }
 };
+
+export const genresFetch = () => async dispatch => {
+  try {
+    const genres = await GamesService.fetchGenres();
+    dispatch(actions.genresFetchSuccess(genres));
+  } catch (error) {
+    dispatch(actions.genresFetchFailure(error));
+  }
+};

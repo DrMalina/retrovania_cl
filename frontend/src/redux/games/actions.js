@@ -2,7 +2,9 @@ import {
   GAMES_CLEANUP,
   GAMES_FETCH,
   GAMES_FETCH_FAILURE,
-  GAMES_FETCH_SUCCESS
+  GAMES_FETCH_SUCCESS,
+  GENRES_FETCH_FAILURE,
+  GENRES_FETCH_SUCCESS
 } from './types';
 
 export const gamesCleanup = () => ({
@@ -22,6 +24,20 @@ export const gamesFetchSuccess = games => ({
 
 export const gamesFetchFailure = error => ({
   type: GAMES_FETCH_FAILURE,
+  meta: {
+    error
+  }
+});
+
+export const genresFetchSuccess = genres => ({
+  type: GENRES_FETCH_SUCCESS,
+  payload: {
+    genres
+  }
+});
+
+export const genresFetchFailure = error => ({
+  type: GENRES_FETCH_FAILURE,
   meta: {
     error
   }

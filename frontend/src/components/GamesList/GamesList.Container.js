@@ -11,18 +11,27 @@ import { GamesFilter } from 'components/GamesFilter';
 import { SpinnerLocal } from 'components/SpinnerLocal';
 
 import { gamesCleanup } from 'redux/games/actions';
-import { gamesFetch } from 'redux/games/utils';
+import { gamesFetch, genresFetch } from 'redux/games/utils';
 
-const GamesListContainer = ({ games, gamesCleanup, gamesFetch, isLoading }) => {
+const GamesListContainer = ({
+  games,
+  gamesCleanup,
+  gamesFetch,
+  genres,
+  genresFetch,
+  isLoading
+}) => {
   const location = useLocation();
   const history = useHistory();
   const parsedSearchQuery = qs.parse(location.search).query || '';
 
   useEffect(() => {
     gamesCleanup();
+    if (genres.length === 0) genresFetch();
+
     const params = new URLSearchParams(location.search);
     gamesFetch({ page: params.get('page'), query: params.get('query') });
-  }, [gamesCleanup, gamesFetch, location]);
+  }, [gamesCleanup, gamesFetch, genresFetch, location]);
 
   const handleSearch = search => {
     const searchQuery = qs.stringify({
@@ -48,12 +57,14 @@ const GamesListContainer = ({ games, gamesCleanup, gamesFetch, isLoading }) => {
 
 const mapStateToProps = state => ({
   games: state.games.gamesInStore,
+  genres: state.games.genres,
   isLoading: state.games.loading
 });
 
 const mapDispatchToProps = {
   gamesCleanup,
-  gamesFetch
+  gamesFetch,
+  genresFetch
 };
 
 const EnhancedGamesListContainer = compose(
