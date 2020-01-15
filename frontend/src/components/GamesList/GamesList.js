@@ -9,31 +9,33 @@ import * as S from './GamesList.styles';
 const GamesList = ({ games, gamesFetch, query }) => {
   const totalGames = useSelector(state => state.games.total);
 
-  return (
+  const renderResultsList = () => (
     <>
-      {totalGames > 0 ? (
-        <>
-          {query ? <p>Results for "{query}"</p> : null}
-          <S.GamesListWrapper>
-            {games.map(({ _id, genres, name, summary }) => (
-              <GamesListItem
-                genres={genres}
-                id={_id}
-                key={_id}
-                name={name}
-                summary={summary}
-              />
-            ))}
-          </S.GamesListWrapper>
-          <Pagination totalGames={totalGames} onClick={gamesFetch} />
-        </>
-      ) : (
-        <>
-          <p>No results found for "{query}"</p>
-          <p>Try checking your spelling or use more general terms</p>
-        </>
-      )}
+      {query ? <p>Results for "{query}"</p> : null}
+      <S.GamesListWrapper>
+        {games.map(({ _id, genres, name, summary }) => (
+          <GamesListItem
+            genres={genres}
+            id={_id}
+            key={_id}
+            name={name}
+            summary={summary}
+          />
+        ))}
+      </S.GamesListWrapper>
+      <Pagination totalGames={totalGames} onClick={gamesFetch} />
     </>
+  );
+
+  const renderNoResultsFoundMsg = () => (
+    <>
+      <p>No results found for "{query}"</p>
+      <p>Try checking your spelling or use more general terms</p>
+    </>
+  );
+
+  return (
+    <>{totalGames > 0 ? renderResultsList() : renderNoResultsFoundMsg()}</>
   );
 };
 
