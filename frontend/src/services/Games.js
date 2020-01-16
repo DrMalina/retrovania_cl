@@ -8,10 +8,11 @@ export default {
   fetchById(id) {
     return instance.get(`/${id}`).then(response => response.data);
   },
-  fetchMany(page, limit, query) {
+  fetchMany(page, limit, query, genres) {
     return instance
       .get('/', {
         params: {
+          genres,
           limit,
           page,
           query

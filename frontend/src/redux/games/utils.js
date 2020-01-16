@@ -4,11 +4,12 @@ import GamesService from 'services/Games';
 export const gamesFetch = ({
   page = 1,
   limit = 10,
-  query = ''
+  query = '',
+  genres = ''
 }) => async dispatch => {
   try {
     dispatch(actions.gamesFetchStart());
-    const games = await GamesService.fetchMany(page, limit, query);
+    const games = await GamesService.fetchMany(page, limit, query, genres);
     dispatch(actions.gamesFetchSuccess(games));
   } catch (error) {
     dispatch(actions.gamesFetchFailure(error));

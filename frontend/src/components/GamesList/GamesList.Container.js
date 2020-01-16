@@ -24,28 +24,50 @@ const GamesListContainer = ({
   const location = useLocation();
   const history = useHistory();
   const parsedSearchQuery = qs.parse(location.search).query || '';
+  const parsedGenresQuery = qs.parse(location.search).genres || '';
 
   useEffect(() => {
     gamesCleanup();
     if (genres.length === 0) genresFetch();
 
     const params = new URLSearchParams(location.search);
-    gamesFetch({ page: params.get('page'), query: params.get('query') });
-  }, [gamesCleanup, gamesFetch, genresFetch, location]);
+    gamesFetch({
+      page: params.get('page'),
+      query: params.get('query'),
+      genres: params.get('genres')
+    });
+  }, [gamesCleanup, gamesFetch, genres.length, genresFetch, location]);
 
-  const handleSearch = search => {
+  const handleSearch = (search, genres) => {
     const searchQuery = qs.stringify({
       //replace multiple whitespaces into 1 and trim
       query: search.replace(/\s\s+/g, ' ').trim()
     });
-    history.push(`/games?${searchQuery}`);
+
+    const genresQuery = qs.stringify({
+      genres: genres.join(',')
+    });
+
+    if (search && genres.length > 0) {
+      history.push(`/games?${searchQuery}&${genresQuery}`);
+    } else if (search && genres.length === 0) {
+      history.push(`/games?${searchQuery}`);
+    } else if (!search && genres.length > 0) {
+      history.push(`/games?${genresQuery}`);
+    } else {
+      history.push('/games');
+    }
   };
 
   return isLoading ? (
     <SpinnerLocal />
   ) : (
     <>
-      <GamesFilter onSearch={handleSearch} initQuery={parsedSearchQuery} />
+      <GamesFilter
+        onSearch={handleSearch}
+        initQuery={parsedSearchQuery}
+        initGenres={parsedGenresQuery}
+      />
       <GamesList
         games={games}
         gamesFetch={gamesFetch}

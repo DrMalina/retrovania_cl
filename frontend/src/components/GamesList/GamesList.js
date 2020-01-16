@@ -29,7 +29,7 @@ const GamesList = ({ games, gamesFetch, query }) => {
 
   const renderNoResultsFoundMsg = () => (
     <>
-      <p>No results found for "{query}"</p>
+      {query ? <p>No results found for "{query}"</p> : <p> No results found</p>}
       <p>Try checking your spelling or use more general terms</p>
     </>
   );
